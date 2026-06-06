@@ -1,0 +1,904 @@
+openapi: 3.0.0
+paths:
+  /api/health:
+    get:
+      operationId: AppController_getHealth
+      parameters: []
+      responses:
+        "200":
+          description: API status
+      summary: Check API health
+      tags:
+        - system
+  /api/store-info:
+    get:
+      operationId: AppController_getStoreInfo
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      summary: Get static Sportline store information
+      tags:
+        - system
+  /api/users/me:
+    get:
+      operationId: UsersController_getMe
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Get current user profile
+      tags:
+        - users
+    patch:
+      operationId: UsersController_updateMe
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileDto"
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Update current user profile
+      tags:
+        - users
+  /api/auth/register:
+    post:
+      operationId: AuthController_register
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterDto"
+      responses:
+        "201":
+          description: ""
+      summary: Create user account and return JWT token
+      tags:
+        - auth
+  /api/auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginDto"
+      responses:
+        "201":
+          description: ""
+      summary: Login with email and password
+      tags:
+        - auth
+  /api/categories:
+    get:
+      operationId: CategoriesController_findAll
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      summary: Get product categories
+      tags:
+        - categories
+    post:
+      operationId: CategoriesController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCategoryDto"
+      responses:
+        "201":
+          description: ""
+      security:
+        - bearer: []
+      summary: Create category as admin
+      tags:
+        - categories
+  /api/categories/{idOrSlug}:
+    get:
+      operationId: CategoriesController_findOne
+      parameters:
+        - name: idOrSlug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get category by id or slug
+      tags:
+        - categories
+  /api/categories/{id}:
+    patch:
+      operationId: CategoriesController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCategoryDto"
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Update category as admin
+      tags:
+        - categories
+    delete:
+      operationId: CategoriesController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Delete category as admin
+      tags:
+        - categories
+  /api/products:
+    get:
+      operationId: ProductsController_findAll
+      parameters:
+        - name: search
+          required: false
+          in: query
+          schema:
+            example: футболка
+            type: string
+        - name: categorySlug
+          required: false
+          in: query
+          schema:
+            example: odezhda
+            type: string
+        - name: categoryId
+          required: false
+          in: query
+          schema:
+            example: a7b753aa-fab3-4209-9b9f-56af097242f4
+            type: string
+        - name: sizes
+          required: false
+          in: query
+          schema:
+            example: S,M,L
+            type: array
+            items:
+              type: string
+              enum:
+                - XS
+                - S
+                - M
+                - L
+                - XL
+                - XXL
+        - name: color
+          required: false
+          in: query
+          schema:
+            example: Белый
+            type: string
+        - name: minPrice
+          required: false
+          in: query
+          schema:
+            example: 900
+            type: number
+        - name: maxPrice
+          required: false
+          in: query
+          schema:
+            example: 3000
+            type: number
+        - name: featured
+          required: false
+          in: query
+          schema:
+            example: true
+            type: boolean
+        - name: sort
+          required: false
+          in: query
+          schema:
+            default: newest
+            type: string
+            enum:
+              - newest
+              - price_asc
+              - price_desc
+              - name_asc
+        - name: page
+          required: false
+          in: query
+          schema:
+            default: 1
+            example: 1
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            default: 12
+            example: 12
+            type: number
+      responses:
+        "200":
+          description: ""
+      summary: Get public catalog with search, filters and pagination
+      tags:
+        - products
+    post:
+      operationId: ProductsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductDto"
+      responses:
+        "201":
+          description: ""
+      security:
+        - bearer: []
+      summary: Create product as admin
+      tags:
+        - products
+  /api/products/featured:
+    get:
+      operationId: ProductsController_findFeatured
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      summary: Get featured products for home page sections
+      tags:
+        - products
+  /api/products/admin:
+    get:
+      operationId: ProductsController_findAllAsAdmin
+      parameters:
+        - name: search
+          required: false
+          in: query
+          schema:
+            example: футболка
+            type: string
+        - name: categorySlug
+          required: false
+          in: query
+          schema:
+            example: odezhda
+            type: string
+        - name: categoryId
+          required: false
+          in: query
+          schema:
+            example: a7b753aa-fab3-4209-9b9f-56af097242f4
+            type: string
+        - name: sizes
+          required: false
+          in: query
+          schema:
+            example: S,M,L
+            type: array
+            items:
+              type: string
+              enum:
+                - XS
+                - S
+                - M
+                - L
+                - XL
+                - XXL
+        - name: color
+          required: false
+          in: query
+          schema:
+            example: Белый
+            type: string
+        - name: minPrice
+          required: false
+          in: query
+          schema:
+            example: 900
+            type: number
+        - name: maxPrice
+          required: false
+          in: query
+          schema:
+            example: 3000
+            type: number
+        - name: featured
+          required: false
+          in: query
+          schema:
+            example: true
+            type: boolean
+        - name: sort
+          required: false
+          in: query
+          schema:
+            default: newest
+            type: string
+            enum:
+              - newest
+              - price_asc
+              - price_desc
+              - name_asc
+        - name: page
+          required: false
+          in: query
+          schema:
+            default: 1
+            example: 1
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            default: 12
+            example: 12
+            type: number
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Get all products including inactive as admin
+      tags:
+        - products
+  /api/products/{idOrSlug}:
+    get:
+      operationId: ProductsController_findOne
+      parameters:
+        - name: idOrSlug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Get product card by id or slug
+      tags:
+        - products
+  /api/products/{id}:
+    patch:
+      operationId: ProductsController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProductDto"
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Update product as admin
+      tags:
+        - products
+    delete:
+      operationId: ProductsController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Deactivate product as admin
+      tags:
+        - products
+  /api/cart:
+    get:
+      operationId: CartController_getCart
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Get current user cart
+      tags:
+        - cart
+    delete:
+      operationId: CartController_clear
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Clear cart
+      tags:
+        - cart
+  /api/cart/items:
+    post:
+      operationId: CartController_addItem
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddCartItemDto"
+      responses:
+        "201":
+          description: ""
+      security:
+        - bearer: []
+      summary: Add product to cart with selected size
+      tags:
+        - cart
+  /api/cart/items/{id}:
+    patch:
+      operationId: CartController_updateItem
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCartItemDto"
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Update cart item quantity
+      tags:
+        - cart
+    delete:
+      operationId: CartController_removeItem
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Remove cart item
+      tags:
+        - cart
+  /api/orders/checkout:
+    post:
+      operationId: OrdersController_checkout
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutDto"
+      responses:
+        "201":
+          description: ""
+      security:
+        - bearer: []
+      summary: Create order from current cart
+      tags:
+        - orders
+  /api/orders/my:
+    get:
+      operationId: OrdersController_findMine
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Get current user orders
+      tags:
+        - orders
+  /api/orders/admin:
+    get:
+      operationId: OrdersController_findAll
+      parameters:
+        - name: status
+          required: false
+          in: query
+          schema:
+            type: string
+            enum:
+              - PENDING
+              - PAID
+              - SHIPPED
+              - DELIVERED
+              - CANCELED
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Get all orders as admin
+      tags:
+        - orders
+  /api/orders/{id}:
+    get:
+      operationId: OrdersController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Get own order by id, or any order as admin
+      tags:
+        - orders
+  /api/orders/{id}/status:
+    patch:
+      operationId: OrdersController_updateStatus
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateOrderStatusDto"
+      responses:
+        "200":
+          description: ""
+      security:
+        - bearer: []
+      summary: Update order status as admin
+      tags:
+        - orders
+info:
+  title: Sportline API
+  description: Backend API for a Sportline sports goods shop pet project.
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    UpdateProfileDto:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Иван
+        lastName:
+          type: string
+          example: Петров
+        phone:
+          type: string
+          example: "+79991234567"
+    RegisterDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@sportline.local
+        password:
+          type: string
+          example: password123
+          minLength: 6
+        firstName:
+          type: string
+          example: Иван
+        lastName:
+          type: string
+          example: Петров
+        phone:
+          type: string
+          example: "+79991234567"
+      required:
+        - email
+        - password
+        - firstName
+        - lastName
+    LoginDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@sportline.local
+        password:
+          type: string
+          example: password123
+          minLength: 6
+      required:
+        - email
+        - password
+    CreateCategoryDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Одежда
+        slug:
+          type: string
+          example: odezhda
+        description:
+          type: string
+          example: Футболки, худи и спортивная одежда
+        imageUrl:
+          type: string
+          example: https://example.com/category.jpg
+        sortOrder:
+          type: number
+          example: 10
+          default: 0
+      required:
+        - name
+    UpdateCategoryDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Одежда
+        slug:
+          type: string
+          example: odezhda
+        description:
+          type: string
+          example: Футболки, худи и спортивная одежда
+        imageUrl:
+          type: string
+          example: https://example.com/category.jpg
+        sortOrder:
+          type: number
+          example: 10
+          default: 0
+    CreateProductDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Слим футболка
+        slug:
+          type: string
+          example: slim-futbolka
+        description:
+          type: string
+          example: Базовая спортивная футболка свободного кроя.
+        price:
+          type: number
+          example: 1000
+          description: Price in RUB
+        imageUrl:
+          type: string
+          example: https://example.com/tshirt.jpg
+        gallery:
+          type: array
+          items:
+            type: string
+        sizes:
+          type: array
+          example:
+            - S
+            - M
+            - L
+          items:
+            type: string
+            enum:
+              - XS
+              - S
+              - M
+              - L
+              - XL
+              - XXL
+        color:
+          type: string
+          example: Белый
+        stock:
+          type: number
+          example: 25
+          default: 0
+        isFeatured:
+          type: boolean
+          example: true
+          default: false
+        isActive:
+          type: boolean
+          example: true
+          default: true
+        categoryId:
+          type: string
+          example: a7b753aa-fab3-4209-9b9f-56af097242f4
+      required:
+        - name
+        - price
+        - imageUrl
+        - sizes
+        - categoryId
+    UpdateProductDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Слим футболка
+        slug:
+          type: string
+          example: slim-futbolka
+        description:
+          type: string
+          example: Базовая спортивная футболка свободного кроя.
+        price:
+          type: number
+          example: 1000
+          description: Price in RUB
+        imageUrl:
+          type: string
+          example: https://example.com/tshirt.jpg
+        gallery:
+          type: array
+          items:
+            type: string
+        sizes:
+          type: array
+          example:
+            - S
+            - M
+            - L
+          items:
+            type: string
+            enum:
+              - XS
+              - S
+              - M
+              - L
+              - XL
+              - XXL
+        color:
+          type: string
+          example: Белый
+        stock:
+          type: number
+          example: 25
+          default: 0
+        isFeatured:
+          type: boolean
+          example: true
+          default: false
+        isActive:
+          type: boolean
+          example: true
+          default: true
+        categoryId:
+          type: string
+          example: a7b753aa-fab3-4209-9b9f-56af097242f4
+    AddCartItemDto:
+      type: object
+      properties:
+        productId:
+          type: string
+          example: a7b753aa-fab3-4209-9b9f-56af097242f4
+        size:
+          type: string
+          enum:
+            - XS
+            - S
+            - M
+            - L
+            - XL
+            - XXL
+          example: L
+        quantity:
+          type: number
+          example: 1
+          default: 1
+      required:
+        - productId
+        - size
+    UpdateCartItemDto:
+      type: object
+      properties:
+        quantity:
+          type: number
+          example: 2
+      required:
+        - quantity
+    CheckoutDto:
+      type: object
+      properties:
+        customerName:
+          type: string
+          example: Иван Петров
+        phone:
+          type: string
+          example: "+79991234567"
+        email:
+          type: string
+          example: user@sportline.local
+        city:
+          type: string
+          example: Москва
+        street:
+          type: string
+          example: Волгоградская
+        house:
+          type: string
+          example: "24"
+        apartment:
+          type: string
+          example: "10"
+        comment:
+          type: string
+          example: Позвонить за час до доставки
+      required:
+        - customerName
+        - phone
+        - email
+        - city
+        - street
+        - house
+    UpdateOrderStatusDto:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - PENDING
+            - PAID
+            - SHIPPED
+            - DELIVERED
+            - CANCELED
+          example: PAID
+      required:
+        - status

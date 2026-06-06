@@ -1,0 +1,90 @@
+<script lang="ts">
+  import { Tabs } from "bits-ui";
+  import Input from "$lib/components/Input.svelte";
+  import Button from "$lib/components/Button.svelte";
+	import { goto } from "$app/navigation";
+
+  let loginEmail = $state("");
+  let loginPassword = $state("");
+  let registerEmail = $state("");
+  let registerPassword = $state("");
+  let registerFirstName = $state("");
+  let registerLastName = $state("")
+  let registerPhone =$state("")
+
+  async function handleLogin() {
+    const email = loginEmail
+    const password = loginPassword
+    const response = await fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await response.json()
+    if(response.ok){
+      localStorage.setItem('token', data.accessToken) 
+       localStorage.setItem('user', JSON.stringify(data.user));
+      goto('/')
+    }else{
+      return alert( "Неверный email или пароль");
+    }
+  }
+  async function loginUser() {
+   const email = registerEmail
+    const password = registerPassword
+    const phone = registerPhone
+    const firstName  = registerFirstName
+    const lastName = registerLastName
+
+    const response = await fetch("http://localhost:3000/api/auth/register", {
+        method:'POST',
+         headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, phone,firstName , lastName})
+    });
+   const data = await response.json()
+
+  if (response.ok) {
+    localStorage.setItem('token', data.accessToken)
+    localStorage.setItem('user', JSON.stringify(data.user))
+    goto('/')
+  } else {
+    alert(data.message || "Ошибка регистрации")
+  }
+   }
+  
+</script>
+
+<div class="flex items-center justify-center min-h-screen bg-gray-50">
+  <div class="w-100 bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold text-center mb-6">Sportline</h1>
+
+    <Tabs.Root value="login">
+      <Tabs.List class="grid grid-cols-2 gap-2 mb-6">
+        <Tabs.Trigger value="login" class="py-2 rounded-lg data-[state=active]:bg-blue-500 data-[state=active]:text-white bg-gray-100">
+          Вход
+        </Tabs.Trigger>
+        <Tabs.Trigger value="register" class="py-2 rounded-lg data-[state=active]:bg-blue-500 data-[state=active]:text-white bg-gray-100">
+          Регистрация
+        </Tabs.Trigger>
+      </Tabs.List>
+
+      <Tabs.Content value="login" class="flex flex-col gap-4">
+        <Input label="Email" type="email" bind:value={loginEmail} placeholder="введите логин" />
+        <Input label="Пароль" type="password" bind:value={loginPassword} placeholder="введите пароль " />
+        <Button label="Войти" size='sm' onClick={handleLogin}/>
+      </Tabs.Content>
+
+      <Tabs.Content value="register" class="flex flex-col gap-3">
+        <Input label="Email" type="email" bind:value={registerEmail} placeholder="введите email" />
+        <Input label="Пароль" type="password" bind:value={registerPassword} placeholder="введите пароль" />
+        <div class="grid grid-cols-2 gap-3">
+          <Input label="Имя" type="text" bind:value={registerFirstName} placeholder="ввведите имя" />
+          <Input label="Фамилия" type="text" bind:value={registerLastName} placeholder="введите фамилию"  />
+        </div>
+        <Input label="Телефон" bind:value={registerPhone} placeholder="введите номер телефона" />
+        <Button label="Зарегистрироваться" size='md'onClick={loginUser} />
+      </Tabs.Content>
+    </Tabs.Root>
+
+  </div>
+</div>
