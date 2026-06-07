@@ -57,21 +57,21 @@
 <div class="px-14 py-12">
 	<div class="mb-12 flex gap-6">
 		<CardNewCollection />
-		{#each closes as clos}
+		{#each closes as clos  (clos.id)}
 			<ProductCard name={clos.name} price={clos.price} imageUrl={clos.imageUrl} />
 		{/each}
 	</div>
 
 	<h2 class="mb-4 text-2xl">Обувь</h2>
 	<div class="mb-12 flex gap-6">
-		{#each shoes as shoe}
+		{#each shoes as shoe (shoe.id)}
 			<ProductCard name={shoe.name} price={shoe.price} imageUrl={shoe.imageUrl} />
 		{/each}
 	</div>
 
 	<h2 class="mb-4 text-2xl">Спорт товары</h2>
 	<div class="flex gap-6">
-		{#each sport as item}
+		{#each sport as item (item.id)}
 			<ProductCard name={item.name} price={item.price} imageUrl={item.imageUrl} />
 		{/each}
 	</div>

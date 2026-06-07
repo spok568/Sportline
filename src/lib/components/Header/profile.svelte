@@ -1,18 +1,17 @@
 <script lang="ts">
-  import { Avatar } from "bits-ui";
-  import ProfileIcon from '$lib/assets/Profile-icon.png'
+	import { Avatar } from 'bits-ui';
+	import ProfileIcon from '$lib/assets/Profile-icon.png';
 </script>
- 
+
 <Avatar.Root
-  delayMs={200}
-  class="data-[status=loaded]:border-foreground bg-muted text-muted-foreground h-24 w-24 rounded-full border text-[25px] font-medium uppercase data-[status=loading]:border-transparent"
+	delayMs={200}
+
 >
-  <div
-    class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-transparent"
-  >
-   
-    <Avatar.Fallback class="border-muted border">
-      <img src={ProfileIcon} alt="иконка профиля">
-    </Avatar.Fallback>
-  </div>
+	<div
+		class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-transparent"
+	>
+		<Avatar.Fallback class=" border">
+			<img src={ProfileIcon} alt="иконка профиля" />
+		</Avatar.Fallback>
+	</div>
 </Avatar.Root>

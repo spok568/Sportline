@@ -1,25 +1,46 @@
 <script lang="ts">
-    interface Props {
-        label?:string;
-        value?:string;
-        placeholder?:string;
-        required?:boolean;
-        type?:'text' | 'password' | 'email' | 'number';
-        className ?:string
-    }
-    let {
-        label = '',
-        value =$bindable(),
-        placeholder='',
-        required=false,
-        type='text',
-        className = '',
-    }:Props = $props()
-</script> 
+  interface Props {
+    label?: string;
+    value?: string | boolean;
+    placeholder?: string;
+    required?: boolean;
+    type?: 'text' | 'password' | 'email' | 'number' | 'checkbox';
+    className?: string;
+  }
+  
+  let {
+    label = '',
+    value = $bindable(),
+    placeholder = '',
+    required = false,
+    type = 'text',
+    className = ''
+  }: Props = $props();
 
+  let id = crypto.randomUUID();
+</script>
 
-
-<label >
-    {label}
-    <input {type} {placeholder} {required} bind:value class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none {className }"   />
+<label for={id} class="flex w-full flex-col gap-1">
+  <span class="text-sm font-medium">{label}</span>
+  
+  {#if type === 'checkbox'}
+    <div class="flex items-center gap-2">
+      <input
+        type="checkbox"
+        bind:checked={value}
+        {id}
+        class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 {className}"
+      />
+      <span>{label}</span>
+    </div>
+  {:else}
+    <input
+      {type}
+      {placeholder}
+      {required}
+      bind:value
+      {id}
+      class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none {className}"
+    />
+  {/if}
 </label>
