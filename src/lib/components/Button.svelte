@@ -3,7 +3,7 @@
 type Variant = 'primary' | 'outline'
 type Size = 'sm' | 'md' | 'lg'
 interface Props {
-    label: string;
+    label?: string;
     variant?:Variant;
     onClick?: (event: MouseEvent) => void;
     size?:Size,
