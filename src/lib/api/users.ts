@@ -1,6 +1,6 @@
 
 
-type User = {
+export type User = {
   id: string;
   email: string;
   firstName: string;
@@ -44,7 +44,7 @@ localStorage.setItem('user', JSON.stringify(data.user))
   loggedInUser = data.user
   return data
 }
-export function logout(){
+export function logout():void{
   localStorage.removeItem('user')
     localStorage.removeItem('token')
     loggedInUser  = null
@@ -56,7 +56,6 @@ export function getToken():string | null {
 export function getUser():User|null {
     if (loggedInUser) return loggedInUser;
   
-  // Если нет — пробуем достать из localStorage
   if (typeof window !== 'undefined') {
     const userStr = localStorage.getItem('user');
     if (userStr) {

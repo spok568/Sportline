@@ -1,13 +1,7 @@
 <script lang="ts">
 	import CardNewCollection from '$lib/components/CardNewCollection.svelte';
 	import ProductCard from '$lib/components/ProductCard.svelte';
-	type Product = {
-		id: string;
-		name: string;
-		price: number;
-		imageUrl: string;
-		color: string;
-	};
+	import type { Product } from '$lib/api/type'
 	let closes: Product[] = $state([]);
 	let shoes: Product[] = $state([]);
 	let sport: Product[] = $state([]);

@@ -1,21 +1,13 @@
 <script lang="ts">
-	type Variant = 'primary' | 'outline';
-	type Size = 'sm' | 'md' | 'lg';
-	interface Props {
-		label?: string;
-		variant?: Variant;
-		onClick?: (event: MouseEvent) => void;
-		size?: Size;
-		icon?: string;
-		class?: string;
-        children?: () => any;
-	}
+import type { Props } from "$lib/api/type";
+
 	let {
 		label = '',
 		variant = 'primary',
 		size = 'lg',
 		onClick,
 		icon = '',
+		iconLast='',
 		class: customClass = '',
          children,
 	}: Props = $props();
@@ -40,4 +32,8 @@
 		<img src={icon} alt="" />
 	{/if}
      {@render children?.()}
+	 {#if iconLast}
+		
+	<img src={iconLast} alt='картинка'> 
+	 {/if}
 </button>

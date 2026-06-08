@@ -1,12 +1,5 @@
 <script lang="ts">
-  interface Props {
-    label?: string;
-    value?: string | boolean;
-    placeholder?: string;
-    required?: boolean;
-    type?: 'text' | 'password' | 'email' | 'number' | 'checkbox';
-    className?: string;
-  }
+import type { PropsForInput } from "$lib/api/type";
   
   let {
     label = '',
@@ -15,7 +8,7 @@
     required = false,
     type = 'text',
     className = ''
-  }: Props = $props();
+  }: PropsForInput = $props();
 
   let id = crypto.randomUUID();
 </script>
@@ -38,7 +31,7 @@
       {type}
       {placeholder}
       {required}
-      bind:value
+      bind:value={value}
       {id}
       class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none {className}"
     />

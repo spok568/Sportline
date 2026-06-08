@@ -3,16 +3,17 @@
   import Input from '$lib/components/Input.svelte';
   import Button from '$lib/components/Button.svelte';
   import { goto } from '$app/navigation';
+  import { getToken,  getUser } from '$lib/api/users';
 
-  let loginEmail = $state('');
-  let loginPassword = $state('');
-  let registerEmail = $state('');
-  let registerPassword = $state('');
-  let registerFirstName = $state('');
-  let registerLastName = $state('');
-  let registerPhone = $state('');
+  let loginEmail:string = $state('');
+  let loginPassword:string = $state('');
+  let registerEmail:string = $state('');
+  let registerPassword:string = $state('');
+  let registerFirstName:string = $state('');
+  let registerLastName:string = $state('');
+  let registerPhone:string = $state('');
 
-  async function handleLogin() {
+  async function handleLogin(): Promise<void> {
     const email = loginEmail;
     const password = loginPassword;
     const response = await fetch('http://localhost:3000/api/auth/login', {
@@ -30,7 +31,7 @@
     }
   }
 
-  async function loginUser() {
+  async function loginUser():Promise<void> {
     const email = registerEmail;
     const password = registerPassword;
     const phone = registerPhone;
@@ -45,8 +46,8 @@
     const data = await response.json();
 
     if (response.ok) {
-      localStorage.setItem('token', data.accessToken);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      getToken()
+      getUser()
       goto('/');
     } else {
       alert(data.message || 'Ошибка регистрации');
