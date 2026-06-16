@@ -63,7 +63,7 @@
       <Tabs.List class="mb-6 grid grid-cols-2 gap-2">
         <Tabs.Trigger
           value="login"
-          class="rounded-lg bg-gray-100 py-2 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
+          class="rounded-lg bg-gray-100  py-2 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
         >
           Вход
         </Tabs.Trigger>
@@ -75,13 +75,15 @@
         </Tabs.Trigger>
       </Tabs.List>
 
-      <Tabs.Content value="login" class="flex flex-col gap-4">
+      <Tabs.Content value="login" class="flex flex-col h-100 gap-4">
         <Input label="Email" type="email" bind:value={loginEmail} placeholder="введите логин" />
         <Input label="Пароль" type="password" bind:value={loginPassword} placeholder="введите пароль" />
-        <Button label="Войти" size="sm" onClick={handleLogin} />
+        <div class="flex items-end justify-center h-full w-full">
+        <Button label="Войти" variant='outline'  size="sm" onClick={handleLogin} />
+        </div>
       </Tabs.Content>
 
-      <Tabs.Content value="register" class="flex flex-col gap-3">
+      <Tabs.Content value="register" class="flex h-100 flex-col gap-3">
         <Input label="Email" type="email" bind:value={registerEmail} placeholder="введите email" />
         <Input label="Пароль" type="password" bind:value={registerPassword} placeholder="введите пароль" />
         <div class="grid grid-cols-2 gap-3">
@@ -89,7 +91,9 @@
           <Input label="Фамилия" type="text" bind:value={registerLastName} placeholder="введите фамилию" />
         </div>
         <Input label="Телефон" bind:value={registerPhone} placeholder="введите номер телефона" />
-        <Button label="Зарегистрироваться" size="md" onClick={loginUser} />
+        <div class="flex items-center justify-center h-full w-full">
+        <Button label="Зарегистрироваться" variant='outline' size="md" onClick={loginUser} />
+        </div>
       </Tabs.Content>
     </Tabs.Root>
   </div>

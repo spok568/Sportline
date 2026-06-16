@@ -23,9 +23,12 @@ export type Product = {
         children?: () => any;
 	}
 
+export type InputValue = string | number | undefined;
+
      export interface PropsForInput {
     label?: string;
-    value?: string | boolean;
+    value?: InputValue ;
+	 checked?: boolean;
     placeholder?: string;
     required?: boolean;
     type?: 'text' | 'password' | 'email' | 'number' | 'checkbox';

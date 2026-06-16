@@ -6,7 +6,7 @@ import type { Props } from "$lib/api/type";
 		variant = 'primary',
 		size = 'lg',
 		onClick,
-		icon = '',
+		iconFirst = '',
 		iconLast='',
 		class: customClass = '',
          children,
@@ -28,8 +28,8 @@ import type { Props } from "$lib/api/type";
 
 <button class={buttonClass} onclick={onClick}>
 	{label}
-	{#if icon}
-		<img src={icon} alt="" />
+	{#if iconFirst}
+		<img src={iconFirst} alt="" />
 	{/if}
      {@render children?.()}
 	 {#if iconLast}

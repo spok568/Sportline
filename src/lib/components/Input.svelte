@@ -4,6 +4,7 @@ import type { PropsForInput } from "$lib/api/type";
   let {
     label = '',
     value = $bindable(),
+    checked = $bindable(),
     placeholder = '',
     required = false,
     type = 'text',
@@ -20,7 +21,7 @@ import type { PropsForInput } from "$lib/api/type";
     <div class="flex items-center gap-2">
       <input
         type="checkbox"
-        bind:checked={value}
+        bind:checked={checked}
         {id}
         class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 {className}"
       />
