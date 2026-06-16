@@ -2,6 +2,7 @@
 import { onMount } from "svelte";
 import ProductCard from "$lib/components/ProductCard.svelte";
 import Button from "$lib/components/Button.svelte";
+import OrderModal from "$lib/components/basket/OrderModal.svelte";
 type CartItem = {
       id: string;
     size: string;
@@ -13,7 +14,7 @@ type CartItem = {
     };
 };
 let items:CartItem[] = $state([]);
-
+ let isOpenOrderModal:boolean = $state(false)
 onMount(async () => {
     const token = localStorage.getItem('token');
     const response = await fetch('http://localhost:3000/api/cart', {
@@ -34,6 +35,9 @@ async function deleteInBasket(itemId: string) {
         }
     });
     items = items.filter(item => item.id !== itemId);
+}
+const openModal = () => {
+    isOpenOrderModal = true
 }
 </script>
 
@@ -70,6 +74,10 @@ async function deleteInBasket(itemId: string) {
             variant="outline"
             size="lg"
             class="w-full max-w-md"
+            onClick={openModal}
         />
     </div>
 {/if}
+
+
+<OrderModal bind:isOpenOrderModal={isOpenOrderModal} />

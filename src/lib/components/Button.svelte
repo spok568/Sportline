@@ -9,7 +9,7 @@
 		variant?: Variant;
 		onClick?: (event: MouseEvent) => void;
 		size?: Size;
-		icon?: string;
+		iconFirst?: string;
 		iconLast?: string;
 		class?: string;
 		children?: Snippet;  
@@ -20,8 +20,8 @@
 		variant = 'primary',
 		size = 'lg',
 		onClick,
-		icon = '',
-		iconLast = '',
+		iconFirst = '',
+		iconLast='',
 		class: customClass = '',
 		children
 	}: Props = $props();
@@ -48,8 +48,8 @@
 
 <button class={buttonClass} onclick={onClick}>
 	{label}
-	{#if icon}
-		<img src={icon} alt="" />
+	{#if iconFirst}
+		<img src={iconFirst} alt="" />
 	{/if}
 	{@render children?.()}
 	{#if iconLast}

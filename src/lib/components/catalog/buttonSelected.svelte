@@ -11,4 +11,4 @@ import Button from "../Button.svelte";
     <Button size="md" variant="outline" onClick={() => selectedSize = 'L'} class={selectedSize === 'L' ? 'bg-blue-500 text-white' : ''}>L</Button>
     <Button size="md" variant="outline" onClick={() => selectedSize = 'XL'} class={selectedSize === 'XL' ? 'bg-blue-500 text-white' : ''}>XL</Button>
     <Button size="md" variant="outline" onClick={() => selectedSize = 'XXL'} class={selectedSize === 'XXL' ? 'bg-blue-500 text-white' : ''}>XXL</Button>
-</div>
+</div>  

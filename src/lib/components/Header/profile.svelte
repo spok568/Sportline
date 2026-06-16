@@ -3,10 +3,7 @@
 	import ProfileIcon from '$lib/assets/Profile-icon.png';
 </script>
 
-<Avatar.Root
-	delayMs={200}
-
->
+<Avatar.Root delayMs={200}>
 	<div
 		class="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-transparent"
 	>
