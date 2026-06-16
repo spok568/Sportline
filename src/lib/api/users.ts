@@ -62,6 +62,6 @@ export function getUser():User|null {
       loggedInUser = JSON.parse(userStr);
       return loggedInUser;
     }
-  }
+  } 
     return null
 }

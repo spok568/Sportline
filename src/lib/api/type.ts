@@ -1,3 +1,5 @@
+import type { Snippet } from "svelte";
+
 	type Variant = 'primary' | 'outline';
 	type Size = 'sm' | 'md' | 'lg';
 
@@ -17,10 +19,10 @@ export type Product = {
 		variant?: Variant;
 		onClick?: (event: MouseEvent) => void;
 		size?: Size;
-		iconFirst?: string;
+		icon?: string;
 		iconLast?: string;
 		class?: string;
-        children?: () => any;
+        children?: () => Snippet;
 	}
 
      export interface PropsForInput {
