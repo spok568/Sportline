@@ -12,18 +12,18 @@
 			variant="outline"
 			label="Перейти в каталог"
 			size="md"
-			class="bg-gray-300 hover:bg-gray-400"
+			class="bg-gray-300 hover:bg-gray-100 hover:cursor-pointer"
 		></Button>
 		<Button
-			icon="src/lib/assets/Vector (1).png"
-			class="h-10 rotate-180 bg-gray-100 hover:bg-gray-200"
+			iconFirst="src/lib/assets/Vector (1).png"
+			class="h-10 rotate-180 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer"
 			size="sm"
 			variant="outline"
 		/>
 		<Button
-			icon="src/lib/assets/Vector (1).png"
+			iconFirst="src/lib/assets/Vector (1).png"
 			size="sm"
-			class=" h-10 bg-gray-100 hover:bg-gray-200"
+			class=" h-10 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer"
 			variant="outline"
 		/>
 	</div>

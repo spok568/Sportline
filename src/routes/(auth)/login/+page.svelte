@@ -2,7 +2,7 @@
   import { Tabs } from 'bits-ui';
   import Input from '$lib/components/Input.svelte';
   import Button from '$lib/components/Button.svelte';
-	import { redirect } from '@sveltejs/kit';
+	import { goto } from '$app/navigation';
 	import { getToken, getUser } from '$lib/api/users';
 
 	let loginEmail: string = $state('');
@@ -25,7 +25,7 @@
     if (response.ok) {
       localStorage.setItem('token', data.accessToken);
       localStorage.setItem('user', JSON.stringify(data.user));
-			redirect(302,'/');
+			goto('/');
     } else {
       alert('Неверный email или пароль');
     }
@@ -48,7 +48,7 @@
     if (response.ok) {
 			getToken();
 			getUser();
-		redirect(302,'/');
+		goto('/');
     } else {
       alert(data.message || 'Ошибка регистрации');
     }
@@ -60,7 +60,7 @@
     <h1 class="mb-6 text-center text-2xl font-bold">Sportline</h1>
 
     <Tabs.Root value="login">
-      <Tabs.List class="mb-6 grid grid-cols-2 gap-2">
+			<Tabs.List class="mb-6 grid  grid-cols-2 gap-2">
         <Tabs.Trigger
           value="login"
 					class="rounded-lg bg-gray-100 py-2 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
@@ -75,7 +75,7 @@
         </Tabs.Trigger>
       </Tabs.List>
 
-			<Tabs.Content value="login" class="flex flex-col gap-4">
+			<Tabs.Content value="login" class="flex h-65 justify-around flex-col gap-4">
 				<Input label="Email" type="email" bind:value={loginEmail} placeholder="Введите логин" />
 				<Input
 					label="Пароль"
@@ -83,10 +83,10 @@
 					bind:value={loginPassword}
 					placeholder="введите пароль"
 				/>
-				<Button label="Войти" size="sm" onClick={handleLogin} />
+				<Button label="Войти" size="sm" class='w-full' variant='outline' onClick={handleLogin} />
       </Tabs.Content>
 
-			<Tabs.Content value="register" class="flex flex-col gap-3">
+			<Tabs.Content value="register" class="flex h-85 flex-col gap-3">
 				<Input label="Email" type="email" bind:value={registerEmail} placeholder="Введите email" />
 				<Input
 					label="Пароль"

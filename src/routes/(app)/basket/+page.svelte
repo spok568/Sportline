@@ -3,6 +3,7 @@ import { onMount } from "svelte";
 import ProductCard from "$lib/components/ProductCard.svelte";
 import Button from "$lib/components/Button.svelte";
 import OrderModal from "$lib/components/basket/OrderModal.svelte";
+
 type CartItem = {
       id: string;
     size: string;
@@ -49,17 +50,17 @@ const totalPrice = items.reduce((sum, item) => {
 
 </script>
 
-<h1 class="text-2xl font-bold p-8">Корзина</h1>
+<h1 class="text-2xl font-bold p-8 ">Корзина</h1>
 
-<div class="px-8 flex flex-wrap gap-6">
+<div class="px-8 flex flex-wrap gap-12">
     {#each items as item (item.id)}
-        <div class="relative w-64">
+        <div class="relative">
             <ProductCard 
                 name={item.product.name}
                 price={item.product.price}
                 imageUrl={item.product.imageUrl}
             />
-            <div class="absolute bottom-2 left-2 bg-white px-2 py-1 text-sm rounded">
+            <div class="absolute bottom-1 h-4 text left-1 bg-white px-2   text-sm rounded">
                 Размер: {item.size}
             </div>
             <button 

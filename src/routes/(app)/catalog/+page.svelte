@@ -112,7 +112,7 @@ async function getToBasket() {
 					name={clos.name}
 					price={clos.price}
 					imageUrl={clos.imageUrl}
-					label="Добавить в корзину"
+
 					onClick={() => {
 						 selectedProductId = clos.id;
 						selectedProduct = clos.name;
@@ -132,7 +132,6 @@ async function getToBasket() {
 						name={shoe.name}
 						price={shoe.price}
 						imageUrl={shoe.imageUrl}
-						label="Добавить в корзину"
 						onClick={() => {
 							 selectedProductId = shoe.id;
 							selectedProduct = shoe.name;
@@ -153,7 +152,6 @@ async function getToBasket() {
 						name={sports.name}
 						price={sports.price}
 						imageUrl={sports.imageUrl}
-						label="Добавить в корзину"
 						onClick={() => {
 							 selectedProductId = sports.id;
 							selectedProduct = sports.name;

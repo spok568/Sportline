@@ -17,7 +17,7 @@
     = $props();
 </script>
 
-<div class="w-64 rounded-lg border p-8 relative">
+<div class="w-68 rounded-lg border p-6 relative">
   {#if onDelete}
     <button 
       onclick={onDelete}
@@ -27,10 +27,15 @@
     </button>
   {/if}
   
-  <img src={imageUrl} alt={name} class="h-52 w-full rounded" />
+  <img src={imageUrl} alt={name} class="h-52 w-full rounded  " />
+  <div class="flex items-center justify-between py-2">
   <h3 class="mt-2 font-bold text-center">{name}</h3>
   <p class="text-lg text-center">{price} ₽</p>
   
+  </div>
+  <div class="border rounded-3xl text-center gap-2 hover:cursor-pointer w-full hover:bg-gray-100 ">
+    <button onclick={onClick}>добавить в корзину</button>
+    </div>
   {#if label && onClick}
     <button onclick={onClick} class="w-full rounded-2xl border text-center hover:bg-gray-100 cursor-pointer mt-2">
       {label}

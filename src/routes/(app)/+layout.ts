@@ -1,11 +1,18 @@
-export const ssr = false;
-import { getToken } from "$lib/api/users";
-import { redirect } from "@sveltejs/kit";
 
-export async function load() {
-    const token = getToken()
-    if(!token){
-        redirect (307,'/login')
+import { browser } from "$app/environment"
+import { redirect } from "@sveltejs/kit"
+import type { LayoutLoad } from "../$types"
+
+export const load: LayoutLoad = async () => {
+    if (browser) {
+        const token = localStorage.getItem('token')
+        
+        if (!token) {
+            throw redirect(302, '/login')
     }
-    return  {token}
+        
+        return { token }
+}
+
+    return {}
 }

@@ -2,71 +2,43 @@
 		import CardNewCollection from '$lib/components/CardNewCollection.svelte';
 		import ProductCard from '$lib/components/ProductCard.svelte';
 		import type { Product } from '$lib/api/type';
-		let closes: Product[] = $state([]);
-		let shoes: Product[] = $state([]);
-		let sport: Product[] = $state([]);
 
-		export async function sportLoad() {
-			let response = await fetch(
-				'http://localhost:3000/api/products?categorySlug=sport-tovary&limit=4',
-				{
-					method: 'GET',
-					headers: { 'Content-Type': 'application/json' }
-				}
-			);
-			let data = await response.json();
-
-			if (response.ok) {
-				sport = data.items;
-			}
+	let { data }: {
+		data: {
+			recommend: Product[];
+			closes: Product[];
+			shoes: Product[];
+			sport: Product[];
 		}
-
-		export async function shoesLoad() {
-			let response = await fetch('http://localhost:3000/api/products?categorySlug=obuv&limit=4', {
-				method: 'GET',
-				headers: { 'Content-Type': 'application/json' }
-			});
-			let data = await response.json();
-
-			if (response.ok) {
-				shoes = data.items;
-			}
-		}
-
-		export async function closesLoad() {
-			let response = await fetch('http://localhost:3000/api/products?categorySlug=odezhda&limit=2', {
-				method: 'GET',
-				headers: { 'Content-Type': 'application/json' }
-			});
-			let data = await response.json();
-			if (response.ok) {
-				closes = data.items;
-			}
-		}
-		sportLoad();
-		closesLoad();
-		shoesLoad();
+	} = $props();
 	</script>
 
 	<div class="px-14 py-12">
-		<div class="mb-12 flex gap-6">
+	<div class="mb-12 grid grid-cols-4 gap-6">
 			<CardNewCollection />
-			{#each closes as clos (clos.id)}
+		{#each data.recommend as recommendes (recommendes.id)}
+			<ProductCard name={recommendes.name} price={recommendes.price} imageUrl={recommendes.imageUrl} />
+		{/each}
+	</div>
+
+	<h2 class="mb-4 text-2xl">Одежда</h2>
+	<div class="mb-12 grid grid-cols-4 gap-6">
+		{#each data.closes as clos (clos.id)}
 				<ProductCard name={clos.name} price={clos.price} imageUrl={clos.imageUrl} />
 			{/each}
 		</div>
 
 		<h2 class="mb-4 text-2xl">Обувь</h2>
-		<div class="mb-12 flex gap-6">
-			{#each shoes as shoe (shoe.id)}
-				<ProductCard name={shoe.name} price={shoe.price} imageUrl={shoe.imageUrl} />
+	<div class="mb-12 grid grid-cols-4 gap-6">
+		{#each data.shoes as shoeses (shoeses.id)}
+			<ProductCard name={shoeses.name} price={shoeses.price} imageUrl={shoeses.imageUrl} />
 			{/each}
 		</div>
 
 		<h2 class="mb-4 text-2xl">Спорт товары</h2>
-		<div class="flex gap-6">
-			{#each sport as item (item.id)}
-				<ProductCard name={item.name} price={item.price} imageUrl={item.imageUrl} />
+	<div class="grid grid-cols-4 gap-6">
+		{#each data.sport as sports (sports.id)}
+			<ProductCard name={sports.name} price={sports.price} imageUrl={sports.imageUrl} />
 			{/each}
 		</div>
 	</div>
