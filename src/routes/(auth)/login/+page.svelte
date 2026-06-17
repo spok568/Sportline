@@ -2,16 +2,16 @@
   import { Tabs } from 'bits-ui';
   import Input from '$lib/components/Input.svelte';
   import Button from '$lib/components/Button.svelte';
-  import { goto } from '$app/navigation';
-  import { getToken,  getUser } from '$lib/api/users';
+	import { redirect } from '@sveltejs/kit';
+	import { getToken, getUser } from '$lib/api/users';
 
-  let loginEmail:string = $state('');
-  let loginPassword:string = $state('');
-  let registerEmail:string = $state('');
-  let registerPassword:string = $state('');
-  let registerFirstName:string = $state('');
-  let registerLastName:string = $state('');
-  let registerPhone:string = $state('');
+	let loginEmail: string = $state('');
+	let loginPassword: string = $state('');
+	let registerEmail: string = $state('');
+	let registerPassword: string = $state('');
+	let registerFirstName: string = $state('');
+	let registerLastName: string = $state('');
+	let registerPhone: string = $state('');
 
   async function handleLogin(): Promise<void> {
     const email = loginEmail;
@@ -25,13 +25,13 @@
     if (response.ok) {
       localStorage.setItem('token', data.accessToken);
       localStorage.setItem('user', JSON.stringify(data.user));
-      goto('/');
+			redirect(302,'/');
     } else {
       alert('Неверный email или пароль');
     }
   }
 
-  async function loginUser():Promise<void> {
+	async function loginUser(): Promise<void> {
     const email = registerEmail;
     const password = registerPassword;
     const phone = registerPhone;
@@ -46,9 +46,9 @@
     const data = await response.json();
 
     if (response.ok) {
-      getToken()
-      getUser()
-      goto('/');
+			getToken();
+			getUser();
+		redirect(302,'/');
     } else {
       alert(data.message || 'Ошибка регистрации');
     }
@@ -63,7 +63,7 @@
       <Tabs.List class="mb-6 grid grid-cols-2 gap-2">
         <Tabs.Trigger
           value="login"
-          class="rounded-lg bg-gray-100  py-2 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
+					class="rounded-lg bg-gray-100 py-2 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
         >
           Вход
         </Tabs.Trigger>
@@ -75,25 +75,36 @@
         </Tabs.Trigger>
       </Tabs.List>
 
-      <Tabs.Content value="login" class="flex flex-col h-100 gap-4">
-        <Input label="Email" type="email" bind:value={loginEmail} placeholder="введите логин" />
-        <Input label="Пароль" type="password" bind:value={loginPassword} placeholder="введите пароль" />
-        <div class="flex items-end justify-center h-full w-full">
-        <Button label="Войти" variant='outline'  size="sm" onClick={handleLogin} />
-        </div>
+			<Tabs.Content value="login" class="flex flex-col gap-4">
+				<Input label="Email" type="email" bind:value={loginEmail} placeholder="Введите логин" />
+				<Input
+					label="Пароль"
+					type="password"
+					bind:value={loginPassword}
+					placeholder="введите пароль"
+				/>
+				<Button label="Войти" size="sm" onClick={handleLogin} />
       </Tabs.Content>
 
-      <Tabs.Content value="register" class="flex h-100 flex-col gap-3">
-        <Input label="Email" type="email" bind:value={registerEmail} placeholder="введите email" />
-        <Input label="Пароль" type="password" bind:value={registerPassword} placeholder="введите пароль" />
+			<Tabs.Content value="register" class="flex flex-col gap-3">
+				<Input label="Email" type="email" bind:value={registerEmail} placeholder="Введите email" />
+				<Input
+					label="Пароль"
+					type="password"
+					bind:value={registerPassword}
+					placeholder="введите пароль"
+				/>
         <div class="grid grid-cols-2 gap-3">
-          <Input label="Имя" type="text" bind:value={registerFirstName} placeholder="введите имя" />
-          <Input label="Фамилия" type="text" bind:value={registerLastName} placeholder="введите фамилию" />
+					<Input label="Имя" type="text" bind:value={registerFirstName} placeholder="Введите имя" />
+					<Input
+						label="Фамилия"
+						type="text"
+						bind:value={registerLastName}
+						placeholder="введите фамилию"
+					/>
         </div>
         <Input label="Телефон" bind:value={registerPhone} placeholder="введите номер телефона" />
-        <div class="flex items-center justify-center h-full w-full">
-        <Button label="Зарегистрироваться" variant='outline' size="md" onClick={loginUser} />
-        </div>
+				<Button label="Зарегистрироваться" size="md" onClick={loginUser} />
       </Tabs.Content>
     </Tabs.Root>
   </div>
