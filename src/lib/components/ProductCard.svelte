@@ -31,7 +31,7 @@
   <div class="flex items-center justify-between py-2">
   <h3 class="mt-2 font-bold text-center">{name}</h3>
   <p class="text-lg text-center">{price} ₽</p>
-  
+
   </div>
   <div class="border rounded-3xl text-center gap-2 hover:cursor-pointer w-full hover:bg-gray-100 ">
     <button onclick={onClick}>добавить в корзину</button>

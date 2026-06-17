@@ -9,10 +9,10 @@ export const load: LayoutLoad = async () => {
         
         if (!token) {
             throw redirect(302, '/login')
-    }
+        }
         
         return { token }
-}
-
+    }
+    
     return {}
 }

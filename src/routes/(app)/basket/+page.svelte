@@ -5,7 +5,7 @@ import Button from "$lib/components/Button.svelte";
 import OrderModal from "$lib/components/basket/OrderModal.svelte";
 
 type CartItem = {
-      id: string;
+    id: string;
     size: string;
     quantity: number;
     product: {
