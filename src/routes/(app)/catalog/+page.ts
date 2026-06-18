@@ -2,7 +2,7 @@ import { CLIENT } from "$lib/api/CLIENT";
 
 const recommendProducts = async () => {
     const res = await CLIENT.GET("/api/products/featured");
-    return res.data || [];
+    return res.data?.items || [];
 };
 
 const sportLoad = async () => {
@@ -10,7 +10,7 @@ const sportLoad = async () => {
         params: {
             query: {
                 categorySlug: "sport-tovary",
-                limit: 4,
+             
             },
         },
     });
@@ -22,7 +22,7 @@ const shoesLoad = async () => {
         params: {
             query: {
                 categorySlug: "obuv",
-                limit: 4,
+              
             },
         },
     });
@@ -34,7 +34,7 @@ const closesLoad = async () => {
         params: {
             query: {
                 categorySlug: "odezhda",
-                limit: 4,
+              
             },
         },
     });

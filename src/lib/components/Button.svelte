@@ -49,10 +49,12 @@
 <button class={buttonClass} onclick={onClick}>
 	{label}
 	{#if iconFirst}
-		<img src={iconFirst} alt="" />
+	<div class="fflex justify-center items-center ">
+		<img src={iconFirst} alt=""  class="h-4 w-4 " />
+		</div>
 	{/if}
 	{@render children?.()}
 	{#if iconLast}
-		<img src={iconLast} alt="картинка" />
+		<img src={iconLast} alt="картинка" class="h-4 w-4" />
 	{/if}
 </button>

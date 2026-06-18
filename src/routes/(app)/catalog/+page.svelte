@@ -5,30 +5,50 @@
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import type { Product } from '$lib/api/type';
 	import ButtonSelected from '$lib/components/catalog/buttonSelected.svelte';
+	import { CLIENT } from '$lib/api/CLIENT';
 	let isOpenModalWindow: boolean = $state(false);
-	let selectedProduct: string = $state('');
+	let selectedProduct: Product | null = $state(null);
 	let selectedProductImage: string = $state('');
 	let selectedProductPrice: string | number = $state('');
 	let selectedProductId: string = $state('');
-	let selectedSize = $state('');
+	import  type {Sizes} from "$lib/api/type"
+	let selectedSize:Sizes = $state('M');
+	let {data}:{
+		data:{
+
+			closes: Product[];
+			shoes: Product[];
+			sport: Product[];
+		}
+	} = $props()
 	function closeModal() {
 		isOpenModalWindow = false;
 	}
 
-async function getToBasket() {
+export async function getToBasket() {
+	
     const token = localStorage.getItem('token');
-    await fetch('http://localhost:3000/api/cart/items', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            productId: selectedProductId, 
-            size: selectedSize,
-            quantity: 1
-        })
-    });
+	if(!selectedSize){
+		alert('такого размера нету')
+		return
+	}
+	if (!selectedProduct?.sizes?.includes(selectedSize)) {
+		alert('Этот размер недоступен');
+		return;
+	}
+	await CLIENT.POST('/api/cart/items',{
+		headers:{
+'Authorization': `Bearer ${token}`
+		},
+		body:{
+			productId:selectedProductId,
+			
+			size:selectedSize,
+			quantity:1
+		}
+	})
+
+    
     closeModal();
     goto('/basket');
 }
@@ -37,47 +57,7 @@ async function getToBasket() {
 	let shoes: Product[] = $state([]);
 	let sport: Product[] = $state([]);
 
-	export async function sportLoad() {
-		let response = await fetch(
-			'http://localhost:3000/api/products?categorySlug=sport-tovary&limit=4',
-			{
-				method: 'GET',
-				headers: { 'Content-Type': 'application/json' }
-			}
-		);
-		let data = await response.json();
-
-		if (response.ok) {
-			sport = data.items;
-		}
-	}
-
-	export async function shoesLoad() {
-		let response = await fetch('http://localhost:3000/api/products?categorySlug=obuv&limit=4', {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		});
-		let data = await response.json();
-
-		if (response.ok) {
-			shoes = data.items;
-		}
-	}
-
-	export async function closesLoad() {
-		let response = await fetch('http://localhost:3000/api/products?categorySlug=odezhda&limit=2', {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' }
-		});
-		let data = await response.json();
-		if (response.ok) {
-			closes = data.items;
-		}
-	}
-
-	sportLoad();
-	closesLoad();
-	shoesLoad();
+	
 </script>
 
 <div class="flex gap-8 px-14 py-12">
@@ -107,15 +87,16 @@ async function getToBasket() {
 	<div class="flex-1">
 		<h2 class="mb-4 text-center text-2xl font-bold">Одежда</h2>
 		<div class="mb-12 flex flex-wrap gap-6">
-			{#each closes as clos (clos.id)}
+			{#each data.closes as clos (clos.id)}
 				<ProductCard
 					name={clos.name}
 					price={clos.price}
 					imageUrl={clos.imageUrl}
+					label='добавить в корзину'
 
 					onClick={() => {
 						 selectedProductId = clos.id;
-						selectedProduct = clos.name;
+						selectedProduct = clos;
 						selectedProductImage = clos.imageUrl;
 						selectedProductPrice = clos.price;
 						isOpenModalWindow = true;
@@ -127,14 +108,16 @@ async function getToBasket() {
 		<div>
 			<p class="mb-4 text-center text-2xl font-bold">Ботинки</p>
 			<div class="flex flex-wrap gap-6">
-				{#each shoes as shoe (shoe.id)}
+				{#each data.shoes as shoe (shoe.id)}
 					<ProductCard
 						name={shoe.name}
 						price={shoe.price}
 						imageUrl={shoe.imageUrl}
+						label='добавить в корзину'
 						onClick={() => {
 							 selectedProductId = shoe.id;
-							selectedProduct = shoe.name;
+							selectedProduct = shoe;
+							
 							selectedProductImage = shoe.imageUrl;
 							selectedProductPrice = shoe.price;
 							isOpenModalWindow = true;
@@ -147,14 +130,15 @@ async function getToBasket() {
 		<div>
 			<p class="mb-4 text-center text-2xl font-bold">Спорт товары</p>
 			<div class="flex flex-wrap gap-6">
-				{#each sport as sports (sports.id)}
+				{#each data.sport as sports (sports.id)}
 					<ProductCard
 						name={sports.name}
 						price={sports.price}
 						imageUrl={sports.imageUrl}
+						label='добавить в корзину'
 						onClick={() => {
 							 selectedProductId = sports.id;
-							selectedProduct = sports.name;
+							selectedProduct = sports;
 							selectedProductImage = sports.imageUrl;
 							selectedProductPrice = sports.price;
 							isOpenModalWindow = true;
@@ -166,18 +150,24 @@ async function getToBasket() {
 	</div>
 </div>
 {#if isOpenModalWindow}
+	
 	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-		<div class="flex w-225 gap-10 rounded-2xl bg-white p-10">
+	
+		<div class="flex w-245 gap-10 rounded-2xl bg-white p-10">
+	
+		
 			<img
 				src={selectedProductImage}
 				alt={selectedProduct}
 				class="h-106 w-md rounded-xl object-cover"
 			/>
+	
 			<div class="flex flex-1 flex-col gap-6 rounded-2xl border px-4 py-2">
 				<h2 class="text-4xl font-bold">{selectedProduct}</h2>
 				<p class="text-3xl">{selectedProductPrice} ₽</p>
 
 			<div>
+		
     <p class="mb-3 text-lg text-gray-500">Размеры</p>
     <div class="flex flex-wrap gap-3">
        <ButtonSelected  bind:selectedSize={selectedSize}/>
@@ -186,7 +176,7 @@ async function getToBasket() {
         <p class="mt-2 text-sm text-green-600">Выбран размер: {selectedSize}</p>
     {/if}
 </div>
-
+	
 			<Button
     iconLast="src/lib/assets/shopping-cart.png"
     label="Добавить в корзину"
@@ -201,6 +191,13 @@ async function getToBasket() {
     class="mt-4 flex gap-2 py-4 text-xl"
 />
 			</div>
+			<Button 
+		variant='outline'
+		size='sm'
+	label='Х'
+	class="mt-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-xl hover:bg-gray-100"
+	onClick={closeModal}
+		/>
 		</div>
 	</div>
 {/if}

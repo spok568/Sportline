@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Button from './Button.svelte';
 </script>
 
@@ -12,19 +13,22 @@
 			variant="outline"
 			label="Перейти в каталог"
 			size="md"
-			class="bg-gray-300 hover:bg-gray-100 hover:cursor-pointer"
+			onClick={goto('/catalog')}
+			class="bg-gray-300 h-15 text-center align-middle hover:bg-gray-100 hover:cursor-pointer"
 		></Button>
+	
 		<Button
 			iconFirst="src/lib/assets/Vector (1).png"
-			class="h-10 rotate-180 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer"
+			class="h-12  rotate-180 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer"
 			size="sm"
 			variant="outline"
 		/>
 		<Button
 			iconFirst="src/lib/assets/Vector (1).png"
 			size="sm"
-			class=" h-10 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer"
+			class=" h-12 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer"
 			variant="outline"
 		/>
+	
 	</div>
 </div>

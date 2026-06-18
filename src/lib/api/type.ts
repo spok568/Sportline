@@ -1,38 +1,55 @@
-import type { Snippet } from "svelte";
+export interface Category {
+    id: string;
+    name: string;
+    slug: string;
+    description?: string;
+    imageUrl?: string | null;
+    sortOrder: number;
+    createdAt: string;
+    updatedAt: string;
+}
 
-	type Variant = 'primary' | 'outline';
-	type Size = 'sm' | 'md' | 'lg';
+export interface Product {
+    id: string;
+    name: string;
+    slug: string;
+    description: string;
+    price: number;
+    imageUrl: string;
+    gallery: string[];
+    sizes: Sizes;
+    color: string;
+    stock: number;
+    isFeatured: boolean;
+    isActive: boolean;
+    categoryId: string;
+    category?: Category;
+    createdAt: string;
+    updatedAt: string;
+}
 
-export type Product = {
-		id: string;
-		name: string;
-		price: number;
-		imageUrl: string;
-		color: string;
-	};
+export interface CartItem {
+    id: string;
+    productId: string;
+    size: Size;
+    quantity: number;
+    product: Product;
+    createdAt: string;
+    updatedAt: string;
+}
 
-    export	interface Props{
-        imageUrl?:string
-        price?:string|number
-        name?:string
-		label?: string;
-		variant?: Variant;
-		onClick?: (event: MouseEvent) => void;
-		size?: Size;
-		icon?: string;
-		iconLast?: string;
-		class?: string;
-        children?: () => Snippet;
-	}
+export interface CartResponse {
+    items: CartItem[];
+}
 
-export type InputValue = string | number | undefined;
+export interface ProductsResponse {
+    items: Product[];
+    meta: {
+        total: number;
+        page: number;
+        limit: number;
+        totalPages: number;
+    };
+}
 
-     export interface PropsForInput {
-    label?: string;
-    value?: InputValue ;
-	 checked?: boolean;
-    placeholder?: string;
-    required?: boolean;
-    type?: 'text' | 'password' | 'email' | 'number' | 'checkbox';
-    className?: string;
-  }
+export type Sizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';

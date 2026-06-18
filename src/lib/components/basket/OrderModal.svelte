@@ -10,6 +10,18 @@ let payCash:boolean = $state(false)
 let tabs: 'доставка'  | 'самовывоз' = $state('доставка');
 let {isOpenOrderModal = $bindable(false)} = $props()
 
+function order(){
+    if(addres && floor && flat && entrance && comaBuilding){
+                      isOpenOrderModal = false
+          alert('Заказ успешно заказан')
+
+    }else{
+        alert('заполните все поля')
+    }
+
+  
+}
+
 </script>
 
 {#if isOpenOrderModal}
@@ -81,6 +93,7 @@ let {isOpenOrderModal = $bindable(false)} = $props()
             <Button
             variant='outline'
             label='Заказать'
+                 onClick={order}
             ></Button>
         </div>
         </div>
@@ -124,6 +137,7 @@ let {isOpenOrderModal = $bindable(false)} = $props()
     <Button
             variant='outline'
             label='Заказать'
+            onClick={order}
             ></Button>
 </div>
             </div>
