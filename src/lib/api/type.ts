@@ -9,6 +9,32 @@ export interface Category {
     updatedAt: string;
 }
 
+export interface PropsForButton{
+     name?: string;
+    price?: number;
+    imageUrl?: string;
+    Url?:string;
+    cost?:string
+    iconLast?:string;
+    label?: string;
+    span?:string; 
+    quantity?:number;
+    onClick?: (event: MouseEvent) => void;
+    onDelete?: (event: MouseEvent) => void;
+}
+
+export interface PropsForInput{
+    label?:string,
+    value?:string,
+    checked?:boolean,
+    placeholder?:string,
+    required?:boolean,
+    type?:'text' | "number" | "password" | 'checkbox',
+    className?:string
+    iconLast?:string;
+    iconFirst?:string;
+}
+
 export interface Product {
     id: string;
     name: string;
@@ -28,10 +54,24 @@ export interface Product {
     updatedAt: string;
 }
 
+export interface Categories {
+       "id": string,
+    "name": string,
+    "slug": string,
+    "description":  string,
+    "imageUrl": null | string,
+    "sortOrder": number,
+    "createdAt": string,
+    "updatedAt": string,
+    "_count": {
+      "products": number
+    }
+}
+
 export interface CartItem {
     id: string;
     productId: string;
-    size: Size;
+    size: Sizes;
     quantity: number;
     product: Product;
     createdAt: string;

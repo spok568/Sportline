@@ -5,12 +5,17 @@ const recommendProducts = async () => {
     return res.data || [];
 };
 
+const fetchCategori = async () => {
+    const res = await CLIENT.GET('/api/categories')
+    return res.data
+}
+
 const sportLoad = async () => {
     const res = await CLIENT.GET("/api/products", {
         params: {
             query: {
                 categorySlug: "sport-tovary",
-                limit: 4,
+
             },
         },
     });
@@ -22,7 +27,7 @@ const shoesLoad = async () => {
         params: {
             query: {
                 categorySlug: "obuv",
-                limit: 4,
+
             },
         },
     });
@@ -34,7 +39,6 @@ const closesLoad = async () => {
         params: {
             query: {
                 categorySlug: "odezhda",
-                limit: 4,
             },
         },
     });
@@ -42,11 +46,12 @@ const closesLoad = async () => {
 };
 
 export const load = async () => {
-    const [sport, shoes, closes, recommend] = await Promise.all([
+    const [sport, shoes, closes, recommend, categories] = await Promise.all([
         sportLoad(),
         shoesLoad(),
         closesLoad(),
         recommendProducts(),
+        fetchCategori()
     ]);
 
     return {
@@ -54,5 +59,6 @@ export const load = async () => {
         closes,
         shoes,
         sport,
+        categories
     };
 };

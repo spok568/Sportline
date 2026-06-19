@@ -11,6 +11,7 @@
 	let selectedProductImage: string = $state('');
 	let selectedProductPrice: string | number = $state('');
 	let selectedProductId: string = $state('');
+import {pictures} from '$lib/components/allPictures'
 	import  type {Sizes} from "$lib/api/type"
 	let selectedSize:Sizes = $state('M');
 	let {data}:{
@@ -53,14 +54,11 @@ export async function getToBasket() {
     goto('/basket');
 }
 
-	let closes: Product[] = $state([]);
-	let shoes: Product[] = $state([]);
-	let sport: Product[] = $state([]);
-
-	
+	import SearchCatalog from '$lib/components/catalog/searchCatalog.svelte';
 </script>
-
+<SearchCatalog/>
 <div class="flex gap-8 px-14 py-12">
+
 	<div class="w-80">
 		<p class="text-center text-2xl font-bold">Фильтр</p>
 
@@ -92,8 +90,9 @@ export async function getToBasket() {
 					name={clos.name}
 					price={clos.price}
 					imageUrl={clos.imageUrl}
+					iconLast={pictures.shoppingCart}
 					label='добавить в корзину'
-
+			cost='₽.'
 					onClick={() => {
 						 selectedProductId = clos.id;
 						selectedProduct = clos;
@@ -113,7 +112,9 @@ export async function getToBasket() {
 						name={shoe.name}
 						price={shoe.price}
 						imageUrl={shoe.imageUrl}
+						iconLast={pictures.shoppingCart}
 						label='добавить в корзину'
+						cost='₽.'
 						onClick={() => {
 							 selectedProductId = shoe.id;
 							selectedProduct = shoe;
@@ -133,7 +134,9 @@ export async function getToBasket() {
 				{#each data.sport as sports (sports.id)}
 					<ProductCard
 						name={sports.name}
+						cost='₽.'
 						price={sports.price}
+						iconLast={pictures.shoppingCart}
 						imageUrl={sports.imageUrl}
 						label='добавить в корзину'
 						onClick={() => {
@@ -158,12 +161,12 @@ export async function getToBasket() {
 		
 			<img
 				src={selectedProductImage}
-				alt={selectedProduct}
+				alt='Выбранный продукт'
 				class="h-106 w-md rounded-xl object-cover"
 			/>
 	
 			<div class="flex flex-1 flex-col gap-6 rounded-2xl border px-4 py-2">
-				<h2 class="text-4xl font-bold">{selectedProduct}</h2>
+				<h2 class="text-4xl font-bold">{selectedProduct?.name}</h2>
 				<p class="text-3xl">{selectedProductPrice} ₽</p>
 
 			<div>
@@ -178,8 +181,9 @@ export async function getToBasket() {
 </div>
 	
 			<Button
-    iconLast="src/lib/assets/shopping-cart.png"
+			iconLast={pictures.shoppingCart} 
     label="Добавить в корзину"
+
     variant="outline"
     onClick={() => {
         if (selectedSize) {

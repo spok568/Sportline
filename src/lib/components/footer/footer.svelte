@@ -29,7 +29,7 @@
 	footer();
 </script>
 
-<div class="flex justify-between px-8 py-8">
+<div class="flex justify-around gap-10">
 	<div>
 		<p class=" mb-2">Информация о нас</p>
 		<div class="flex flex-col gap-1 text-sm text-gray-600">
@@ -45,5 +45,10 @@
 			<p>{storeInfo.workingHours.days}</p>
 			<p>{storeInfo.workingHours.hours}</p>
 		</div>
+
 	</div>
+
 </div>
+<div class="flex justify-center py-6">
+			<p>{storeInfo.copyright}</p>
+			</div>

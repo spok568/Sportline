@@ -58,7 +58,6 @@ let priceOfProduct = $derived(  items.reduce((sum, item) => {
     return sum + (item.product.price * item.quantity);
 }, 0))
 
-$inspect(priceOfProduct)
 
 </script>
 
@@ -69,12 +68,14 @@ $inspect(priceOfProduct)
 {#if items.length === 0}
     <p class="px-8 text-gray-500">Корзина пуста</p>
 {:else}
-<div class="border rounded-2xl ">
+<div class="border  ">
     <div class="px-8 mt-4 text-lg font-semibold">
     {#each items as item (item.id)}
 <div class="border-b">
+
   <span>{item.product.name}:</span>
             <span>{item.product.price}</span>
+            
             <div>
                         <span>количество:{item.quantity}</span>
                
@@ -88,9 +89,10 @@ $inspect(priceOfProduct)
     <div class="px-8  m-4">
         <Button 
             label="Перейти к оформлению"
+            
             variant="outline"
             size="lg"
-            class="w-full max-w-md hover:bg-gray-100 hover:cursor-pointer"
+            class="w-full   hover:cursor-pointer"
             onClick={openModal}
             
         />
@@ -103,21 +105,17 @@ $inspect(priceOfProduct)
         <div class="relative">
         
             <ProductCard 
+            cost='₽.'
                 name={item.product.name}
                 price={item.product.price}
                 imageUrl={item.product.imageUrl}
                 quantity={item.quantity}
-
+                onDelete={() => deleteInBasket(item.id)}
                 span={item.size}
             />
      
 
-            <button 
-                onclick={() => deleteInBasket(item.id)}
-                class="absolute top-2 right-2 w-6 h-6 rounded-full hover:bg-gray-100 cursor-pointer flex items-center justify-center"
-            >
-                ✕
-            </button>
+         
          
             
         </div>

@@ -1,8 +1,11 @@
 <script lang="ts">
 	import CardNewCollection from '$lib/components/CardNewCollection.svelte';
 	import ProductCard from '$lib/components/ProductCard.svelte';
-	import type { Product } from '$lib/api/type';
+	import shoppingCart from '$lib/assets/shoppingCart.png'
+import {pictures} from '$lib/components/allPictures'
+	import type { Product,Categories } from '$lib/api/type';
 	import { goto } from '$app/navigation';
+	import Button from '$lib/components/Button.svelte';
 	
 function goToCatalog(){
 	goto('/catalog')
@@ -13,36 +16,48 @@ function goToCatalog(){
 			closes: Product[];
 			shoes: Product[];
 			sport: Product[];
+			categories: Categories[]; 
 		}
 	} = $props();
+	function getProductsByCategory(){
+		return[
+			...data.recommend,
+			...data.closes,
+			...data.shoes,
+			...data.sport,
+		]
+	}
+	function ProductId(id:string){
+		return  getProductsByCategory().filter(product  => product.id === id)
+	}
 </script>
 
 <div class="px-14 py-12">
 	<div class="mb-12 grid grid-cols-4 gap-6 ">
 		<CardNewCollection />
 		{#each data.recommend as recommendes (recommendes.id)}
-			<ProductCard name={recommendes.name} price={recommendes.price} imageUrl={recommendes.imageUrl} onClick={goToCatalog} label='перейти в каталог'/>
+			<ProductCard imageUrl={recommendes.imageUrl} onClick={goToCatalog} />
 		{/each}
 	</div>
-
-	<h2 class="mb-4 text-2xl">Одежда</h2>
-	<div class="mb-12 grid grid-cols-4 gap-6">
-		{#each data.closes as clos (clos.id)}
-			<ProductCard name={clos.name} price={clos.price} imageUrl={clos.imageUrl} onClick={goToCatalog} label='перейти в каталог'/>
+	{#each data.categories as categori (categori.id) }
+	<div class="flex justify-between w-[1,180px] h-[68px] p-[10px] gap-[10px]">
+	<div class="w-[892px] h-[48px]">
+	<span class="w-[301px] h-[48px] font-bold leading-[40px] text-[40px]">	{categori.name}</span>
+		</div>
+		<Button 
+		label='Просмотреть все'
+		variant='noBorder'
+		class='cursor-pointer '
+		onClick={goto('/catalog')}
+		/>
+		</div>
+		
+			{const categoryProduct = getProductsByCategory(categori.id)}
+		{#each categoryProduct as product, index(index)}
+		<div class="flex ">
+				<ProductCard name={product.name} price={product.price} imageUrl={product.imageUrl} onClick={goToCatalog} label='перейти в каталог' cost='₽.' iconLast={pictures.shoppingCart} />
+				</div>
 		{/each}
-	</div>
-
-	<h2 class="mb-4 text-2xl">Обувь</h2>
-	<div class="mb-12 grid grid-cols-4 gap-6">
-		{#each data.shoes as shoeses (shoeses.id)}
-			<ProductCard name={shoeses.name} price={shoeses.price} imageUrl={shoeses.imageUrl} onClick={goToCatalog} label='перейти в каталог'/>
-		{/each}
-	</div>
-
-	<h2 class="mb-4 text-2xl">Спорт товары</h2>
-	<div class="grid grid-cols-4 gap-6">
-		{#each data.sport as sports (sports.id)}
-			<ProductCard name={sports.name} price={sports.price} imageUrl={sports.imageUrl} onClick={goToCatalog} label='перейти в каталог'/>
-		{/each}
-	</div>
+	{/each}
+	
 </div>

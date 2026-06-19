@@ -1,8 +1,12 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	
-	type Variant = 'primary' | 'outline';
+ 	
+
+	type Variant = 'primary' | 'outline' | 'noBorder';
 	type Size = 'sm' | 'md' | 'lg';
+	
+
 	
 	interface Props {
 		label?: string;
@@ -10,7 +14,7 @@
 		onClick?: (event: MouseEvent) => void;
 		size?: Size;
 		iconFirst?: string;
-		iconLast?: string;
+		iconLast?:string;
 		class?: string;
 		children?: Snippet;  
 	}
@@ -18,7 +22,7 @@
 	let {
 		label = '',
 		variant = 'primary',
-		size = 'lg',
+		size ,
 		onClick,
 		iconFirst = '',
 		iconLast='',
@@ -28,7 +32,8 @@
 
 	const variantClasses = {
 		primary: 'bg-blue-600 hover:bg-blue-700 text-white',
-		outline: 'border border-gray-300 hover:bg-gray-100'
+		outline: 'border border-gray-300 hover:bg-gray-100',
+		noBorder: ''
 	};
 
 	const sizeClasses = {
@@ -39,8 +44,7 @@
 	
 	const buttonClass = [
     customClass,              
-    'rounded-lg',
-    'w-fit',
+
     variantClasses[variant],
     sizeClasses[size]
 ];
@@ -49,12 +53,15 @@
 <button class={buttonClass} onclick={onClick}>
 	{label}
 	{#if iconFirst}
-	<div class="fflex justify-center items-center ">
-		<img src={iconFirst} alt=""  class="h-4 w-4 " />
+	
+	<div class="flex items-center justify-center">
+		<img src={iconFirst} alt=""    />
 		</div>
 	{/if}
 	{@render children?.()}
 	{#if iconLast}
-		<img src={iconLast} alt="картинка" class="h-4 w-4" />
+<div class="flex justify-center items-center ">
+		<img src={iconLast} alt="картинка" />
+		</div>
 	{/if}
 </button>
