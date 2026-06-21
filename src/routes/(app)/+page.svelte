@@ -1,11 +1,11 @@
 <script lang="ts">
 	import CardNewCollection from '$lib/components/CardNewCollection.svelte';
 	import ProductCard from '$lib/components/ProductCard.svelte';
-	import shoppingCart from '$lib/assets/shoppingCart.png'
 import {pictures} from '$lib/components/allPictures'
 	import type { Product,Categories } from '$lib/api/type';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Button.svelte';
+	
 	
 function goToCatalog(){
 	goto('/catalog')
@@ -19,16 +19,17 @@ function goToCatalog(){
 			categories: Categories[]; 
 		}
 	} = $props();
-	function getProductsByCategory(){
-		return[
+   function getProductsByCategory(categoryId:string) {
+	const recomendProduct = [
 			...data.recommend,
+	]
+        const allProducts = [
+
 			...data.closes,
 			...data.shoes,
-			...data.sport,
+            ...data.sport
 		]
-	}
-	function ProductId(id:string){
-		return  getProductsByCategory().filter(product  => product.id === id)
+        return allProducts.filter(product => product.categoryId === categoryId)
 	}
 </script>
 

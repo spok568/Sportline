@@ -5,10 +5,10 @@ import Button from "../Button.svelte";
 </script>
 
 <div class="flex flex-wrap gap-3">
-    <Button size="md" variant="outline" onClick={() => selectedSize = 'XS'} >XS</Button>
-    <Button size="md" variant="outline" onClick={() => selectedSize = 'S'} >S</Button>
-    <Button size="md" variant="outline" onClick={() => selectedSize = 'M'}>M</Button>
-    <Button size="md" variant="outline" onClick={() => selectedSize = 'L'} >L</Button>
-    <Button size="md" variant="outline" onClick={() => selectedSize = 'XL'} >XL</Button>
-    <Button size="md" variant="outline" onClick={() => selectedSize = 'XXL'} >XXL</Button>
+    <Button size='sm' variant="outline" onClick={() => selectedSize = 'XS'} >XS</Button>
+    <Button size='sm' variant="outline" onClick={() => selectedSize = 'S'} >S</Button>
+    <Button size='sm' variant="outline" onClick={() => selectedSize = 'M'}>M</Button>
+    <Button size='sm' variant="outline" onClick={() => selectedSize = 'L'} >L</Button>
+    <Button size='sm' variant="outline" onClick={() => selectedSize = 'XL'} >XL</Button>
+    <Button size='sm' variant="outline" onClick={() => selectedSize = 'XXL'} >XXL</Button>
 </div>  

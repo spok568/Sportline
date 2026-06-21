@@ -60,69 +60,63 @@ let priceOfProduct = $derived(  items.reduce((sum, item) => {
 
 
 </script>
+<div class="border-b px-[50px] mb-[20px] py-4">
+	<h1 class="text-2xl font-bold">Корзина</h1>
+</div>
+<div class="px-[50px] pb-[100px] flex justify-center gap-[60px] max-w-[1600px] mx-auto">
 
-<h1 class="text-2xl font-bold p-8 ">Корзина</h1>
-
-<div class="px-8  flex flex-wrap gap-12">
-<div class="flex justify-end h-full py-8">
+	<div class="flex-1 w-full">
+		<div class="flex flex-wrap gap-x-[30px] gap-y-[50px]">
 {#if items.length === 0}
-    <p class="px-8 text-gray-500">Корзина пуста</p>
+				<p class="text-gray-500">Корзина пуста</p>
 {:else}
-<div class="border  ">
-    <div class="px-8 mt-4 text-lg font-semibold">
     {#each items as item (item.id)}
-<div class="border-b">
-
-  <span>{item.product.name}:</span>
-            <span>{item.product.price}</span>
-            
-            <div>
-                        <span>количество:{item.quantity}</span>
-               
-                <span> размер:{item.size} </span>
+					<div class="w-[280px] shrink-0">
+						<ProductCard 
+							name={item.product.name}
+							price={item.product.price}
+							cost="Р."
+							imageUrl={item.product.imageUrl}
+							quantity={item.quantity}
+							span={item.size}
+							onDelete={() => deleteInBasket(item.id)}
+							onClick={() => addQuantity(item.id)}
+						/>
+					</div>
+				{/each}
+			{/if}
                 </div>
  </div>
+
+	<div class="w-[340px] shrink-0">
+		{#if items.length > 0}
+			<div class="border border-gray-300 p-6 bg-white">
+				<p class="text-lg font-bold mb-6">К оформлению</p>
+				
+				<div class="flex flex-col gap-[10px]">
+					{#each items as item (item.id)}
+						<div class="flex justify-between items-center">
+							<span class="font-bold text-sm">{item.product.name}</span>
+							<span class=" text-sm">{item.product.price} Р.</span>
+						</div>
     {/each}
+				</div>
  
-        Итого: {priceOfProduct} ₽
+				<div class="flex justify-between items-center pt-4 border-t border-gray-300">
+					<span class="text-lg font-bold">Итого:</span>
+					<span class="text-lg ">{priceOfProduct} Р.</span>
     </div>
-    <div class="px-8  m-4">
+				
         <Button 
-            label="Перейти к оформлению"
-            
+					label="Продолжить"
             variant="outline"
-            size="lg"
-            class="w-full   hover:cursor-pointer"
+					size='sm'
+					class="w-full mt-6 bg-[#D9D9D9] "
             onClick={openModal}
-            
         />
-    </div>
     </div>
 {/if}   
 </div>
-    {#each items as item (item.id)}
-    
-        <div class="relative">
-        
-            <ProductCard 
-            cost='₽.'
-                name={item.product.name}
-                price={item.product.price}
-                imageUrl={item.product.imageUrl}
-                quantity={item.quantity}
-                onDelete={() => deleteInBasket(item.id)}
-                span={item.size}
-            />
-     
-
-         
-         
-            
-        </div>
-        
-    {/each}
 </div>
-
-
 
 <OrderModal bind:isOpenOrderModal={isOpenOrderModal} />

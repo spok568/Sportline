@@ -10,6 +10,7 @@
 	let selectedProduct: Product | null = $state(null);
 	let selectedProductImage: string = $state('');
 	let selectedProductPrice: string | number = $state('');
+	let quantity: number = $state(1)
 	let selectedProductId: string = $state('');
 import {pictures} from '$lib/components/allPictures'
 	import  type {Sizes} from "$lib/api/type"
@@ -45,7 +46,7 @@ export async function getToBasket() {
 			productId:selectedProductId,
 			
 			size:selectedSize,
-			quantity:1
+			quantity:quantity
 		}
 	})
 
@@ -156,34 +157,31 @@ export async function getToBasket() {
 	
 	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
 	
-		<div class="flex w-245 gap-10 rounded-2xl bg-white p-10">
+		<div class="relative flex w-[880px] justify-center items-center h-[511px] gap-[10px] bg-white">
 	
 		
 			<img
 				src={selectedProductImage}
 				alt='Выбранный продукт'
-				class="h-106 w-md rounded-xl object-cover"
+				class="h-[431px] w-[320px]"
 			/>
-	
-			<div class="flex flex-1 flex-col gap-6 rounded-2xl border px-4 py-2">
-				<h2 class="text-4xl font-bold">{selectedProduct?.name}</h2>
+			<div class="flex flex-col w-[350px] border border-[#D9D9D9] px-4 py-4">
+				<div class="pb-[10px] pt-[20px] pr-[20px] pl-[20px]">
+					<h2 class="text-[16px] font-bold">{selectedProduct?.name}</h2>
 				<p class="text-3xl">{selectedProductPrice} ₽</p>
-
-			<div>
-		
+				</div>
+				<div class="  pr-[5px] pl-[10px]">
     <p class="mb-3 text-lg text-gray-500">Размеры</p>
-    <div class="flex flex-wrap gap-3">
-       <ButtonSelected  bind:selectedSize={selectedSize}/>
+					<div class="flex flex-nowrap gap-0.5">
+						<ButtonSelected bind:selectedSize={selectedSize}/>
     </div>
 	  {#if selectedSize}
         <p class="mt-2 text-sm text-green-600">Выбран размер: {selectedSize}</p>
     {/if}
-</div>
-	
+					<div class="pt-6">
 			<Button
 			iconLast={pictures.shoppingCart} 
     label="Добавить в корзину"
-
     variant="outline"
     onClick={() => {
         if (selectedSize) {
@@ -192,16 +190,19 @@ export async function getToBasket() {
             alert('Выберите размер');
         }
     }}
-    class="mt-4 flex gap-2 py-4 text-xl"
+							class="flex gap-2 py-4 text-xl w-full justify-center"
 />
+			</div>
+				</div>
 			</div>
 			<Button 
 		variant='outline'
 		size='sm'
 	label='Х'
-	class="mt-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-xl hover:bg-gray-100"
+				class="absolute top-[40px] right-[50px] flex h-10 w-10 items-center justify-center rounded-full bg-white text-xl hover:bg-gray-100"
 	onClick={closeModal}
 		/>
 		</div>
+		
 	</div>
 {/if}

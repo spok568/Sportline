@@ -120,8 +120,8 @@ function order(){
     onClick={() => tabs = 'самовывоз' }
     >Самовывоз</Button>
     </div>
-    <div class="flex flex-col items-center  py-4 gap-4">
-    <div class="border rounded-2xl p-6 w-full">
+    <div class="flex flex-col justify-center items-center  py-4 gap-4">
+    <div class=" p-6 w-full flex flex-col justify-center items-center">
     <div class="space-y-3">
     <div>
     <p>Заказ можно забрать по адресу:</p>
