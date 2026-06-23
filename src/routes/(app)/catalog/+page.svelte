@@ -64,21 +64,17 @@ export async function getToBasket() {
 		<p class="text-center text-2xl font-bold">Фильтр</p>
 
 		<p class="mt-4 font-bold">Размеры</p>
+		
 		<div class="flex flex-wrap gap-1.5 border-b border-gray-400 py-2">
-	<Button size="sm" variant="outline" onClick={() => selectedSize = 'XS'}>XS</Button>
-	<Button size="sm" variant="outline" onClick={() => selectedSize = 'S'}>S</Button>
-	<Button size="sm" variant="outline" onClick={() => selectedSize = 'M'}>M</Button>
-	<Button size="sm" variant="outline" onClick={() => selectedSize = 'L'}>L</Button>
-	<Button size="sm" variant="outline" onClick={() => selectedSize = 'XL'}>XL</Button>
-	<Button size="sm" variant="outline" onClick={() => selectedSize = 'XXL'}>XXL</Button>
+	<ButtonSelected />
 </div>
 
 		<div class="py-2">
 			<p class="font-bold">Категория</p>
 			<div class="p-2">
-				<Input label="Одежда" type="checkbox" />
-				<Input label="Обувь" type="checkbox" />
-				<Input label="Спорт товары" type="checkbox" />
+				<Input text="Одежда" type="checkbox" />
+				<Input text="Обувь" type="checkbox" />
+				<Input text="Спорт товары" type="checkbox" />
 			</div>
 		</div>
 	</div>
@@ -163,7 +159,7 @@ export async function getToBasket() {
 			<img
 				src={selectedProductImage}
 				alt='Выбранный продукт'
-				class="h-[431px] w-[320px]"
+				class="h-[431px] w-[320px] mr-15 border-[1px] border-[#D9D9D9]"
 			/>
 			<div class="flex flex-col w-[350px] border border-[#D9D9D9] px-4 py-4">
 				<div class="pb-[10px] pt-[20px] pr-[20px] pl-[20px]">
@@ -196,10 +192,10 @@ export async function getToBasket() {
 				</div>
 			</div>
 			<Button 
-		variant='outline'
+		variant='noBorder'
 		size='sm'
 	label='Х'
-				class="absolute top-[40px] right-[50px] flex h-10 w-10 items-center justify-center rounded-full bg-white text-xl hover:bg-gray-100"
+				class="absolute top-[40px] right-[50px] flex h-10 w-10 items-center justify-center hover:cursor-pointer bg-white text-xl "
 	onClick={closeModal}
 		/>
 		</div>

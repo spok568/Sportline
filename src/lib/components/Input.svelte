@@ -7,7 +7,8 @@
 		checked = $bindable<boolean>(),
 		placeholder = '',
 		required = false,
-		type = 'text',
+		inputType  = 'text',
+		text='',
 		className = '',
 		iconLast = '',
 		iconFirst = ''
@@ -19,7 +20,7 @@
 <label for={id} class="flex flex-col gap-1">
 	<span class="text-sm">{label}</span>
 	
-	{#if type === 'checkbox'}
+	{#if inputType === 'checkbox'}
 		<div class="flex items-center gap-2">
 			<input
 				type="checkbox"
@@ -27,7 +28,7 @@
 				bind:checked={checked}
 				class="text-blue-600 focus:ring-blue-500 {className}"
 			/>
-			<span>{label}</span>
+			<span>{text}</span>
 		</div>
 
 	{:else}
@@ -42,7 +43,7 @@
 			
 			<input
 				id={id}
-				type={type}
+				type={inputType}
 				placeholder={placeholder}
 				required={required}
 				bind:value={value}

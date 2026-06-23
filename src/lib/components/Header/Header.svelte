@@ -4,10 +4,8 @@
 	import Nav from './Nav.svelte';
 	import Sportline from '$lib/assets/Sportline.png';
 	import Profile from '$lib/components/Header/profile.svelte';
-	import Button from '../Button.svelte';
 	import { getUser } from '$lib/api/users';
 	import { onMount } from 'svelte';
-	import { logout } from '$lib/api/function';
 import type { User } from '$lib/api/users';
 
 	let user: User | null = $state(null);

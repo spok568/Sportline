@@ -26,26 +26,30 @@ function order(){
 
 {#if isOpenOrderModal}
  <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-<div class="bg-white p-6 rounded-3xl w-150">
-    {#if tabs === 'доставка'}
-    <div class="flex flex-col gap-3">
-    <div class="flex justify-end">
+<div class="bg-white p-6  w-[631px] h-[400px] relative">
+ <div class=" absolute right-1 top-0.5">
     <Button 
     size='sm'
-    variant='outline'
+    variant='noBorder'
     onClick={() => isOpenOrderModal = false}
+    class=' hover:cursor-pointer'
     >✕</Button>
     </div>
-    <div class="flex gap-4 justify-around">
+    {#if tabs === 'доставка'}
+    <div class="   relative flex flex-col gap-3">
+   
+    <div class="flex p-[4px] h-[42] w-[531] justify-around items-center ">
     <Button
     size='sm'
     variant='outline'
     onClick={() => tabs = 'доставка' }
+    class='w-[261px] h-[34px] pt-[7px] pb-[7px] text-white bg-black'
     >Доставка</Button>
       <Button
     size='sm'
     variant='outline'
     onClick={() => tabs = 'самовывоз' }
+      class='w-[261px] h-[34px] pt-[7px] pb-[7px]'
     >Самовывоз</Button>
     </div>
         <p class="font-bold">Укажите ваш адрес</p>
@@ -54,96 +58,95 @@ function order(){
                 <Input 
                placeholder='Адрес'
                 bind:value={addres}
+                className='w-full h-[33px] px-[50px] gap-[10px]'
                 />
             </div>
-            <div>
+            <div class="">
                 <Input 
                placeholder='Квартира'
                 bind:value={flat}
+                className='w-full h-[33px] px-[50px] gap-[10px]'
+                />
+            </div>
+            <div class="">
+                <Input 
+               placeholder='Этаж'
+                bind:value={floor}
+                       className='w-full h-[33px]  px-[50px] gap-[10px]'
                 />
             </div>
             <div>
                 <Input 
                placeholder='Подъезд'
                 bind:value={entrance}
+                       className='w-full h-[33px] px-[50px] gap-[10px]'
                 />
             </div>
-            <div>
+            <div class="col-span-1">
                 <Input 
                placeholder='Корпус'
                 bind:value={comaBuilding}
-                />
-            </div>
-            <div>
-                <Input 
-               placeholder='Этаж'
-                bind:value={floor}
+                       className='w-full h-[33px] px-[50px] gap-[10px]'
                 />
             </div>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-[10px] p-2">
             <Input 
-            type="checkbox"
+            inputType="checkbox"
             bind:checked={payCash}
-            label='Оплата наличными'
+            text='Оплата наличными'
             />
 
         </div>
-        <div class="flex justify-center">
+        <div class="flex justify-center py-2">
             <Button
             variant='outline'
-            label='Заказать'
                  onClick={order}
-            ></Button>
+                 class='p-[10px] gap-[7px] w-[531px] h-[35px] flex items-center bg-[#D9D9D9] justify-center text-center text-center '
+            >Заказать</Button>
         </div>
         </div>
 
   
    {:else if tabs === 'самовывоз'}
     <div class="flex flex-col gap-3">
-    <div class="flex justify-end">
-    <Button 
-    size='sm'
-    variant='outline'
-    onClick={() => isOpenOrderModal = false}
-    >✕</Button>
-    </div>
-    <div class="flex gap-4 justify-around">
-    <Button
-    size='sm'
-    variant='outline'
-    onClick={() => tabs = 'доставка' }
-    >Доставка</Button>
-      <Button
-    size='sm'
-    variant='outline'
-    onClick={() => tabs = 'самовывоз' }
-    >Самовывоз</Button>
-    </div>
-    <div class="flex flex-col justify-center items-center  py-4 gap-4">
-    <div class=" p-6 w-full flex flex-col justify-center items-center">
-    <div class="space-y-3">
-    <div>
-    <p>Заказ можно забрать по адресу:</p>
-    <p>394028, г. Москва, ул. Волгоградская, 24</p>
-    </div>
-    <div>
-        <p>Часы работы:</p>
-        <p>Понедельник - пятница<br>9:00 - 18:00</p>
-    </div>
-    </div>
-    </div>
-<div class="flex justify-center">
-    <Button
-            variant='outline'
-            label='Заказать'
-            onClick={order}
-            ></Button>
-</div>
-            </div>
+      <div class="flex p-[4px] h-[42] w-[531] justify-around  items-center">
+        <Button
+          size='sm'
+          variant='outline'
+          onClick={() => tabs = 'доставка'}
+          class='w-[261px] h-[34px] pt-[7px] pb-[7px] '
+        >Доставка</Button>
+        <Button
+          size='sm'
+          variant='outline'
+          onClick={() => tabs = 'самовывоз'}
+          class='w-[261px] h-[34px] pt-[7px] pb-[7px] text-white bg-black'
+        >Самовывоз</Button>
+      </div>
+
+      <div class="flex flex-col gap-4 py-4 pl-2">
+        <div class="gap-[10px] py-[10px]">
+          <p class="font-bold  text-[16px]">Заказ можно забрать по адресу:</p>
+          <p class="mt-2 text-[16px]">394028, г. Москва, ул. Волгоградская, 24</p>
+        </div>
+        <div class="gap-[10px] py-[10px]">
+          <p class=" text-sm">Часы работы:</p>
+          <p class="mt-1 text-sm ">Понедельник - пятница<br>9:00 - 18:00</p>
+        </div>
+      </div>
+
+      <div class="flex justify-center py-2">
+        <Button
+          variant='outline'
+          label='Заказать'
+          class='p-[10px] gap-[7px] w-[531px] h-[35px] flex items-center justify-center bg-[#D9D9D9]'
+          onClick={order}
+        ></Button>
+      </div>
     </div>
   
-    {/if}
+    {/if} 
     </div>
 </div>
 {/if}

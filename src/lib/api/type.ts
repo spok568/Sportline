@@ -29,7 +29,8 @@ export interface PropsForInput{
     checked?:boolean,
     placeholder?:string,
     required?:boolean,
-    type?:'text' | "number" | "password" | 'checkbox',
+    inputType?:'text' | "number" | "password" | 'checkbox'| 'email',
+    text?:string
     className?:string
     iconLast?:string;
     iconFirst?:string;
