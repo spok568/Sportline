@@ -43,20 +43,21 @@ function goToCatalog(){
 	{#each data.categories as categori (categori.id) }
 	<div class="flex justify-between w-[1,180px] h-[68px] p-[10px] gap-[10px]">
 	<div class="w-[892px] h-[48px]">
-	<span class="w-[301px] h-[48px] font-bold leading-[40px] text-[40px]">	{categori.name}</span>
+	<span class="w-[301px] h-[48px] font-bold leading-[40px] uppercase text-[40px] font-family-poppins italic">	{categori.name}</span>
 		</div>
 		<Button 
 		label='Просмотреть все'
 		variant='noBorder'
-		class='cursor-pointer '
+		class='cursor-pointer font-family-poppins text-[#5D5D5D] text-[14px]'
 		onClick={goto('/catalog')}
+		
 		/>
 		</div>
 		
 			{const categoryProduct = getProductsByCategory(categori.id)}
 		{#each categoryProduct as product, index(index)}
 		<div class="flex ">
-				<ProductCard name={product.name} price={product.price} imageUrl={product.imageUrl} onClick={goToCatalog} label='перейти в каталог' cost='₽.' iconLast={pictures.shoppingCart} />
+				<ProductCard  class='font-family-poppins text-[#2C2C2C] leading-2 uppercase tracking-[2px]' name={product.name} price={product.price} imageUrl={product.imageUrl} onClick={goToCatalog} label='перейти в каталог' cost='₽' iconLast={pictures.shoppingCart} />
 				</div>
 		{/each}
 	{/each}

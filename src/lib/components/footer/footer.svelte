@@ -29,26 +29,36 @@
 	footer();
 </script>
 
-<div class="flex justify-around gap-10">
-	<div>
-		<p class=" mb-2">Информация о нас</p>
-		<div class="flex flex-col gap-1 text-sm text-gray-600">
-			<p>{storeInfo.address}</p>
-			<p>{storeInfo.phone}</p>
-			<p>{storeInfo.email}</p>
+<div class="flex justify-around gap-2.5">
+	<div class="gap-8">
+		<p class=" mb-2 font-family-inter text-[10px] leading-14 tracking-[1px] uppercase opacity-40">
+			Информация о нас
+		</p>
+		<div class="flex flex-col gap-1 text-sm">
+			<p class="font-family-inter text-[12px] uppercase opacity-60">{storeInfo.address}</p>
+			<p class="font-family-inter text-[12px] uppercase opacity-60">{storeInfo.phone}</p>
+			<div class="border-with w-18 border-b">
+				<p class="font-family-inter text-[12px] lowercase opacity-60">{storeInfo.email}</p>
+			</div>
 		</div>
 	</div>
 
-	<div>
-		<p class=" mb-2">Часы работы</p>
-		<div class="flex flex-col gap-1 text-sm text-gray-600">
-			<p>{storeInfo.workingHours.days}</p>
-			<p>{storeInfo.workingHours.hours}</p>
+	<div class="gap-8">
+		<p
+			class=" font-family-inter text-[10px] leading-14 font-medium tracking-[1px] uppercase opacity-40"
+		>
+			Часы работы
+		</p>
+		<div class="flex flex-col gap-1 text-sm">
+			<p class="font-family-inter text-[12px] font-medium uppercase opacity-60">
+				{storeInfo.workingHours.days}
+			</p>
+			<p class="font-family-inter text-[12px] font-medium uppercase opacity-60">
+				{storeInfo.workingHours.hours}
+			</p>
 		</div>
-
 	</div>
-
 </div>
 <div class="flex justify-center py-6">
-			<p>{storeInfo.copyright}</p>
-			</div>
+	<p class="font-family-inter text-[10px] leading-13 lowercase opacity-40">{storeInfo.copyright}</p>
+</div>

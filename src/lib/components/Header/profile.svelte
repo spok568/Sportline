@@ -9,10 +9,10 @@
 	>
 		<Avatar.Fallback>
 			<img 
-				src={ProfileIcon} 
-				alt="иконка профиля" 
+src={ProfileIcon} 
+alt="иконка профиля" 
 				class="w-[12px] h-[12.86px]"
-			/>
+/>
 		</Avatar.Fallback>
 	</div>
 </Avatar.Root>

@@ -5,7 +5,7 @@
 
 <Avatar.Root>
 	<div
-		class="flex items-center justify-center w-[50px] h-[50px] p-[10px] gap-[20px] rounded-full border-[1.5px] border-white bg-black overflow-hidden"
+		class="flex h-[50px] w-[50px] items-center justify-center gap-[20px] overflow-hidden rounded-full border-[1.5px] border-white bg-black p-[10px]"
 	>
 		<Avatar.Fallback>
 			<img 

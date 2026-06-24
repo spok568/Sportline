@@ -1,6 +1,9 @@
 <script>
 	import '../app.css';
-	  let { children } = $props();
+	import bgImage from '$lib/assets/main-background.png';
+	let { children } = $props();
 </script>
 
-{@render children()}
+<div style:background-image="url({bgImage})">
+	{@render children()}
+</div>

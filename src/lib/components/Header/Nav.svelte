@@ -1,19 +1,15 @@
 <script>
-import { goto } from "$app/navigation";
-
-function gotoMain(){
-goto('/')
-}
-function gotoCatalog(){
-goto('/catalog')
-}
-function gotoBasket(){
-	goto('/basket')
-}
+	import { goto } from '$app/navigation';
 </script>
 
-<div class="flex gap-20 p-10 h-[43px] w-[466px]">
-	<span onclick={gotoMain} class="text-[16px] text w-[84px] h-[23px] hover:cursor-pointer">Главная</span>
-	<span onclick={gotoCatalog} class="text-[16px] w-[84px] h-[23px] hover:cursor-pointer">Каталог</span>
-	<span onclick={gotoBasket} class="text-[16px] w-[84px] h-[23px] hover:cursor-pointer">Корзина</span>
+<div class="font-popins flex w-116.5 gap-5 p-2.5 tracking-[2px]">
+	<button onclick={() => goto('/')} class="w-[84px] text-[16px] hover:cursor-pointer"
+		>Главная</button
+	>
+	<button onclick={() => goto('/catalog')} class="w-[84px] text-[16px] hover:cursor-pointer"
+		>Каталог</button
+	>
+	<button onclick={() => goto('/basket')} class="w-[84px] text-[16px] hover:cursor-pointer"
+		>Корзина</button
+	>
 </div>
