@@ -11,7 +11,6 @@
 	import type { Sizes } from '$lib/api/type';
 	import SearchCatalog from '$lib/components/catalog/searchCatalog.svelte';
 	import { resolve } from '$app/paths';
-	import Arrow from '$lib/components/icon/icons/arrow.svelte';
 	import Accordion from '$lib/components/accordion.svelte';
 
 	let isOpenModalWindow: boolean = $state(false);
@@ -60,16 +59,6 @@
 		closeModal();
 		goto(resolve('/basket'));
 	}
-	let dropDownMenuCategory: boolean = $state(false);
-	let dropDownMenuColor: boolean = $state(false);
-	let dropDownMenuPrice: boolean = $state(false);
-
-	function menuCategori() {
-		dropDownMenuCategory = !dropDownMenuCategory;
-	}
-	function menuPrice() {
-		dropDownMenuPrice = !dropDownMenuPrice;
-	}
 	let priceFrom = $state(0);
 	let priceUpTo = $state(0);
 </script>
@@ -85,51 +74,41 @@
 			<ButtonSelected />
 		</div>
 
-		<div class="py-2">
-			<Accordion title="Категория" iconLast={pictures.Arrow} class="border-b border-[#C9C9C9]">
-				{#snippet children()}
+		<div class="py-2 ">
+			<Accordion title="Категория" iconLast={pictures.Arrow} class="border-b border-[#C9C9C9] ">
+
 					<div class="p-2" in:fly={{ y: -10, duration: 200 }} out:fade>
-						<Input text="Одежда" inputType="checkbox" />
-						<Input text="Обувь" inputType="checkbox" />
-						<Input text="Спорт товары" inputType="checkbox" />
+						<Input text="Одежда" inputType="checkbox" className='border-[#A2A2A2] ' />
+						<Input text="Обувь" inputType="checkbox" className='border-[#A2A2A2]'/>
+						<Input text="Спорт товары" inputType="checkbox" className='border-[#A2A2A2]'/>
 					</div>
-				{/snippet}
+		
 			</Accordion>
-			<div class="flex justify-between border-b border-[#C9C9C9]">
-				<p class="p-[10px] font-bold">Цвет</p>
+			
 
-				<button
-					class=" duration-400 {dropDownMenuColor ? 'rotate-270' : 'rotate-90'} "
-					onclick={() => (dropDownMenuColor = !dropDownMenuColor)}
+				<Accordion 
+				title='Цвет'
+				iconLast={pictures.Arrow}
+				 class="border-b border-[#C9C9C9]"
 				>
-					<Arrow />
-				</button>
-			</div>
-			{#if dropDownMenuColor}
-				<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
-					<Input text="Белый" inputType="checkbox" />
-					<Input text="Черный" inputType="checkbox" />
-					<Input text="Красный" inputType="checkbox" />
+					<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
+					<Input text="Белый" inputType="checkbox" className='border-[#A2A2A2]'/>
+					<Input text="Черный" inputType="checkbox" className='border-[#A2A2A2]'/>
+					<Input text="Красный" inputType="checkbox" className='border-[#A2A2A2]'/>
 				</div>
-			{/if}
-			<div class="flex justify-between border-b border-[#C9C9C9]">
-				<p class="p-[10px] font-bold">Цвет</p>
+			</Accordion>
 
-				<Button
-					iconLast={pictures.Arrow}
-					variant="noBorder"
-					class=" {dropDownMenuPrice ? 'rotate-90' : ' rotate-270'} "
-					onClick={menuPrice}
-				/>
-			</div>
-
-			{#if dropDownMenuPrice}
-				<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
-					<input class="w-50" type="range" bind:value={priceFrom} min="0" max="10000" />
+			<Accordion 
+				title='Цeна'
+				iconLast={pictures.Arrow}
+				 class="border-b border-[#C9C9C9]"
+				>
+					<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
+					<input class="w-50 border-[#A2A2A2]" type="range" bind:value={priceFrom} min="0" max="10000" />
 
 					<p>цена от: {priceFrom}</p>
 
-					<input class="w-50" type="range" bind:value={priceUpTo} min="0" max="10000" />
+					<input class="w-50 border-[#A2A2A2]" type="range" bind:value={priceUpTo} min="0" max="10000" />
 
 					<p>цена до: {priceUpTo}</p>
 
@@ -140,7 +119,8 @@
 						<p>цена от: {priceFrom} до {priceUpTo}</p>
 					</div>
 				</div>
-			{/if}
+			</Accordion>
+	
 		</div>
 	</div>
 

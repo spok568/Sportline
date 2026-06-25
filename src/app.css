@@ -14,7 +14,7 @@
 @plugin '@tailwindcss/typography';
 
 body {
-	font-family: 'Inter', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 h1,
