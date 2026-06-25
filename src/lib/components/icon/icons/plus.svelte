@@ -6,17 +6,15 @@
 
 <svg
 	width="7"
-	height="13"
-	viewBox="0 0 7 13"
+	height="12"
+	viewBox="0 0 7 12"
 	{...attrs}
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 >
 	<path
-		d="M1 12L6 6.5L1 1"
+		d="M5.64153 5.6064L3.07076 5.6064M3.07076 5.6064L0.5 5.6064M3.07076 5.6064L3.07076 0.5M3.07076 5.6064L3.07076 10.7127"
 		stroke="#1E1E1E"
-		stroke-width="2"
 		stroke-linecap="round"
-		stroke-linejoin="round"
 	/>
 </svg>

@@ -5,18 +5,18 @@
 </script>
 
 <svg
-	width="7"
-	height="13"
-	viewBox="0 0 7 13"
+	width="16"
+	height="16"
+	viewBox="0 0 16 16"
 	{...attrs}
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 >
+	<circle cx="7.55834" cy="7.55834" r="6.80834" stroke="black" stroke-width="1.5" />
 	<path
-		d="M1 12L6 6.5L1 1"
-		stroke="#1E1E1E"
-		stroke-width="2"
+		d="M12.575 12.575L15.0833 15.0833"
+		stroke="black"
+		stroke-width="1.5"
 		stroke-linecap="round"
-		stroke-linejoin="round"
 	/>
 </svg>

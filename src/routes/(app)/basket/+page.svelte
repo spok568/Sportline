@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import ProductCard from '$lib/components/ProductCard.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import OrderModal from '$lib/components/basket/OrderModal.svelte';
+	import ProductCard from '$lib/components/card/productCard.svelte';
+	import Button from '$lib/components/button.svelte';
+	import OrderModal from '$lib/components/basket/orderModal.svelte';
 	import type { CartItem } from '$lib/api/type';
 	import { CLIENT } from '$lib/api/CLIENT';
 
@@ -81,7 +81,7 @@
 	);
 </script>
 
-<div class="mb-[20px] border-b px-[50px] py-4">
+<div class="mb-[20px] w-11/12 border-b px-12.5 py-4">
 	<h1 class="text-2xl font-bold">Корзина</h1>
 </div>
 <div class="mx-auto flex max-w-[1600px] justify-center gap-[60px] px-[50px] pb-[100px]">
@@ -110,7 +110,7 @@
 
 	<div class="w-[340px] shrink-0">
 		{#if items.length > 0}
-			<div class="border border-gray-300 bg-white p-6">
+			<div class="border border-[#D9D9D9] p-6">
 				<p class="mb-6 text-lg font-bold">К оформлению</p>
 
 				<div class="flex flex-col gap-[10px]">

@@ -1,3 +1,6 @@
+import type { Component } from 'svelte';
+import type { SVGAttributes } from 'svelte/elements';
+
 export interface Category {
 	id: string;
 	name: string;
@@ -13,9 +16,9 @@ export interface PropsForCard {
 	name?: string;
 	price?: number;
 	imageUrl?: string;
-	Url?: string;
+	Url?: Component<SVGAttributes<SVGElement>> | string;
 	cost?: string;
-	iconLast?: string;
+	iconLast?: Component<SVGAttributes<SVGElement>> | string;
 	label?: string;
 	span?: string;
 	quantity?: number;
@@ -33,8 +36,8 @@ export interface PropsForInput {
 	inputType?: 'text' | 'number' | 'password' | 'checkbox' | 'email' | 'range';
 	text?: string;
 	className?: string;
-	iconLast?: string;
-	iconFirst?: string;
+	iconLast?: Component<SVGAttributes<SVGElement>> | string;
+	iconFirst?: Component<SVGAttributes<SVGElement>> | string;
 }
 
 export interface Product {

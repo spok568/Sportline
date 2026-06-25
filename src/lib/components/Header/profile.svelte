@@ -1,18 +1,14 @@
 <script lang="ts">
 	import { Avatar } from 'bits-ui';
-	import ProfileIcon from '$lib/assets/ProfileIcon.png';
+	import { pictures } from '$lib/components/icon/icons';
 </script>
 
 <Avatar.Root>
 	<div
-		class="flex items-center justify-center w-[50px] h-[50px] p-[10px] gap-[20px] rounded-full border-[1.5px] border-white bg-black overflow-hidden"
+		class="flex h-[50px] w-[50px] items-center justify-center gap-[20px] overflow-hidden rounded-full border-[1.5px] border-white bg-black p-[10px]"
 	>
 		<Avatar.Fallback>
-			<img 
-src={ProfileIcon} 
-alt="иконка профиля" 
-				class="w-[12px] h-[12.86px]"
-/>
+			<pictures.ProfileIcon class="h-5 w-5 text-white" />
 		</Avatar.Fallback>
 	</div>
 </Avatar.Root>

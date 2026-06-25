@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Input from '../Input.svelte';
-	import { pictures } from '../allPictures';
+	import Input from '../input.svelte';
+	import { pictures } from '$lib/components/icon/icons';
 </script>
 
 <div
@@ -11,9 +11,9 @@
 	</div>
 	<div class="flex">
 		<Input
-			iconFirst={pictures.search}
+			iconFirst={pictures.Search}
 			placeholder="Search"
-			className="w-[367px] h-[50px] bg-[#D9D9D9] border-[1px]"
+			className="w-[367px] h-[50px] bg-[#D9D9D9] border-[1px] pl-10"
 		/>
 	</div>
 </div>

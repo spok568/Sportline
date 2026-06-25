@@ -6,17 +6,11 @@
 
 <svg
 	width="7"
-	height="13"
-	viewBox="0 0 7 13"
+	height="1"
+	viewBox="0 0 7 1"
 	{...attrs}
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 >
-	<path
-		d="M1 12L6 6.5L1 1"
-		stroke="#1E1E1E"
-		stroke-width="2"
-		stroke-linecap="round"
-		stroke-linejoin="round"
-	/>
+	<path d="M5.6416 0.5L0.500075 0.5" stroke="#1E1E1E" stroke-linecap="round" />
 </svg>

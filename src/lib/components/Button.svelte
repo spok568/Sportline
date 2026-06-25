@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import type { Component } from 'svelte';
+	import type { SVGAttributes } from 'svelte/elements';
 
 	type Variant = 'primary' | 'outline' | 'noBorder';
 	type Size = 'sm' | 'md' | 'lg';
@@ -9,8 +11,8 @@
 		variant?: Variant;
 		onClick?: (event: MouseEvent) => void;
 		size?: Size;
-		iconFirst?: string;
-		iconLast?: string;
+		iconFirst?: Component<SVGAttributes<SVGElement>> | string;
+		iconLast?: Component<SVGAttributes<SVGElement>> | string;
 		class?: string;
 		children?: Snippet;
 	}
@@ -45,13 +47,13 @@
 	{label}
 	{#if iconFirst}
 		<div class="flex items-center justify-center">
-			<img src={iconFirst} alt="" />
+			<svelte:component this={iconFirst} class="h-5 w-5" />
 		</div>
 	{/if}
 	{@render children?.()}
 	{#if iconLast}
 		<div class="flex items-center justify-center">
-			<img src={iconLast} alt="картинка" />
+			<svelte:component this={iconFirst} class="h-5 w-5" />
 		</div>
 	{/if}
 </button>

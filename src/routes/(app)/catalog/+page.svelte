@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '$lib/components/Button.svelte';
-	import Input from '$lib/components/Input.svelte';
-	import ProductCard from '$lib/components/ProductCard.svelte';
+	import Button from '$lib/components/button.svelte';
+	import Input from '$lib/components/input.svelte';
+	import ProductCard from '$lib/components/card/productCard.svelte';
 	import type { Product } from '$lib/api/type';
 	import ButtonSelected from '$lib/components/catalog/buttonSelected.svelte';
 	import { CLIENT } from '$lib/api/CLIENT';
 	import { fade, fly } from 'svelte/transition';
-	import { pictures } from '$lib/components/allPictures';
+	import { pictures } from '$lib/components/icon/icons';
 	import type { Sizes } from '$lib/api/type';
 	import SearchCatalog from '$lib/components/catalog/searchCatalog.svelte';
 	import { resolve } from '$app/paths';
+	import Arrow from '$lib/components/icon/icons/arrow.svelte';
+	import Accordion from '$lib/components/accordion.svelte';
 
 	let isOpenModalWindow: boolean = $state(false);
 	let selectedProduct: Product | null = $state(null);
@@ -70,8 +72,6 @@
 	}
 	let priceFrom = $state(0);
 	let priceUpTo = $state(0);
-
-	$inspect(dropDownMenuColor);
 </script>
 
 <SearchCatalog />
@@ -86,23 +86,15 @@
 		</div>
 
 		<div class="py-2">
-			<div class="flex justify-between border-b border-[#C9C9C9]">
-				<p class="p-[10px] font-bold">Категория</p>
-
-				<Button
-					iconLast={pictures.arrow}
-					variant="noBorder"
-					class="rotate-270 {dropDownMenuCategory ? 'rotate-270' : 'rotate-90'} "
-					onClick={menuCategori}
-				/>
-			</div>
-			{#if dropDownMenuCategory}
-				<div class="p-2" in:fly={{ y: -10, duration: 200 }} out:fade>
-					<Input text="Одежда" inputType="checkbox" />
-					<Input text="Обувь" inputType="checkbox" />
-					<Input text="Спорт товары" inputType="checkbox" />
-				</div>
-			{/if}
+			<Accordion title="Категория" iconLast={pictures.Arrow} class="border-b border-[#C9C9C9]">
+				{#snippet children()}
+					<div class="p-2" in:fly={{ y: -10, duration: 200 }} out:fade>
+						<Input text="Одежда" inputType="checkbox" />
+						<Input text="Обувь" inputType="checkbox" />
+						<Input text="Спорт товары" inputType="checkbox" />
+					</div>
+				{/snippet}
+			</Accordion>
 			<div class="flex justify-between border-b border-[#C9C9C9]">
 				<p class="p-[10px] font-bold">Цвет</p>
 
@@ -110,7 +102,7 @@
 					class=" duration-400 {dropDownMenuColor ? 'rotate-270' : 'rotate-90'} "
 					onclick={() => (dropDownMenuColor = !dropDownMenuColor)}
 				>
-					<img src={pictures.arrow} alt="картинка" />
+					<Arrow />
 				</button>
 			</div>
 			{#if dropDownMenuColor}
@@ -124,7 +116,7 @@
 				<p class="p-[10px] font-bold">Цвет</p>
 
 				<Button
-					iconLast={pictures.arrow}
+					iconLast={pictures.Arrow}
 					variant="noBorder"
 					class=" {dropDownMenuPrice ? 'rotate-90' : ' rotate-270'} "
 					onClick={menuPrice}
@@ -160,7 +152,7 @@
 					name={clos.name}
 					price={clos.price}
 					imageUrl={clos.imageUrl}
-					iconLast={pictures.shoppingCart}
+					iconLast={pictures.ShoppingCart}
 					label="добавить в корзину"
 					cost="₽."
 					onClick={() => {
@@ -182,7 +174,7 @@
 						name={shoe.name}
 						price={shoe.price}
 						imageUrl={shoe.imageUrl}
-						iconLast={pictures.shoppingCart}
+						iconLast={pictures.ShoppingCart}
 						label="добавить в корзину"
 						cost="₽."
 						onClick={() => {
@@ -206,7 +198,7 @@
 						name={sports.name}
 						cost="₽."
 						price={sports.price}
-						iconLast={pictures.shoppingCart}
+						iconLast={pictures.ShoppingCart}
 						imageUrl={sports.imageUrl}
 						label="добавить в корзину"
 						onClick={() => {
@@ -245,7 +237,7 @@
 					{/if}
 					<div class="pt-6">
 						<Button
-							iconLast={pictures.shoppingCart}
+							iconLast={pictures.ShoppingCart}
 							label="Добавить в корзину"
 							variant="outline"
 							onClick={() => {

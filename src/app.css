@@ -7,6 +7,7 @@
 	--font-family-inter: 'Inter', sans-serif;
 	--font-family-poppins: 'Poppins', sans-serif;
 	--font-family-heading: 'Poppins', sans-serif;
+	--font-family-beatrice: 'Beatrice Deck Trial', 'Poppins', sans-serif;
 }
 
 @plugin '@tailwindcss/forms';
@@ -23,4 +24,8 @@ h4,
 h5,
 h6 {
 	font-family: 'Poppins', sans-serif;
+}
+
+.beatrice {
+	font-family: 'Beatrice Deck Trial', sans-serif;
 }

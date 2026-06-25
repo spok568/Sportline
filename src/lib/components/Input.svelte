@@ -1,5 +1,7 @@
 <script lang="ts">
-	import type { PropsForInput } from "$lib/api/type";
+	import type { Component } from 'svelte';
+	import type { SVGAttributes } from 'svelte/elements';
+	import type { PropsForInput } from '$lib/api/type';
 
 	let {
 		label = '',
@@ -7,8 +9,8 @@
 		checked = $bindable<boolean>(),
 		placeholder = '',
 		required = false,
-		inputType  = 'text',
-		text='',
+		inputType = 'text',
+		text = '',
 		className = '',
 		iconLast = '',
 		iconFirst = ''
@@ -19,43 +21,26 @@
 
 <label for={id} class="flex flex-col gap-1">
 	<span class="text-sm">{label}</span>
-	
+
 	{#if inputType === 'checkbox'}
 		<div class="flex items-center gap-2">
-			<input
-				type="checkbox"
-				id={id}
-				bind:checked={checked}
-				class="text-blue-600 focus:ring-blue-500 {className}"
-			/>
+			<input type="checkbox" {id} bind:checked class={className} />
 			<span>{text}</span>
 		</div>
-
 	{:else}
-		<div class="relative bg-white flex items-center  ">
+		<div class="relative flex items-center bg-white">
 			{#if iconFirst}
-				<img 
-					src={iconFirst} 
-					alt="" 
-					class="absolute left-3 "
-				/>
+				<div class="absolute left-3 flex items-center">
+					<svelte:component this={iconFirst} class="h-5 w-5" />
+				</div>
 			{/if}
-			
-			<input
-				id={id}
-				type={inputType}
-				placeholder={placeholder}
-				required={required}
-				bind:value={value}
-				class="{className} pl-10 "
-		
-			/>
+
+			<input {id} type={inputType} {placeholder} {required} bind:value class="{className} " />
+
 			{#if iconLast}
-				<img 
-					src={iconLast} 
-					alt="" 
-					class="absolute right-3 "
-				/>
+				<div class="absolute right-3 flex items-center">
+					<svelte:component this={iconLast} class="h-5 w-5 " />
+				</div>
 			{/if}
 		</div>
 	{/if}

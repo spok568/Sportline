@@ -1,7 +1,7 @@
 import { redirect, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
-import { registerZod } from '$lib/api/schemaZod';
-import type { PageServerLoad, Actions } from './$types';
+import { registerZod } from '$lib/api/validateSchema';
+import type { PageServerLoad } from './$types';
 import { zod } from 'sveltekit-superforms/adapters'; 
 
 export const load: PageServerLoad = async ({ cookies }) => {

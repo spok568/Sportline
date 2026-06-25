@@ -29,7 +29,7 @@
 	footer();
 </script>
 
-<div class="flex justify-around gap-2.5">
+<div class="flex justify-around gap-2.5 bg-[#EDEDED]">
 	<div class="gap-8">
 		<p class=" mb-2 font-family-inter text-[10px] leading-14 tracking-[1px] uppercase opacity-40">
 			Информация о нас
@@ -59,6 +59,6 @@
 		</div>
 	</div>
 </div>
-<div class="flex justify-center py-6">
+<div class="flex justify-center bg-[#EDEDED] py-6">
 	<p class="font-family-inter text-[10px] leading-13 lowercase opacity-40">{storeInfo.copyright}</p>
 </div>

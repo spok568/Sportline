@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from './Button.svelte';
-	import { pictures } from '$lib/components/allPictures';
+	import Button from './button.svelte';
+	import { pictures } from '$lib/components/icon/icons';
 </script>
 
 <div class="flex h-[386px] w-[378px] flex-col gap-[10px] pt-[15px] pb-[15px]">
@@ -22,17 +22,17 @@
 		<Button
 			variant="outline"
 			label="Перейти в каталог"
-			iconLast={pictures.arrowRight}
+			iconLast={pictures.ArrowRight}
 			onClick={goto('/catalog')}
 			class="flex h-[40px] w-[278px] items-center justify-center gap-2 bg-[#D9D9D9] font-family-inter hover:cursor-pointer hover:bg-gray-300"
 		/>
 		<Button
-			iconFirst={pictures.arrow}
+			iconFirst={pictures.Arrow}
 			class="h-10 w-10 rotate-180  hover:cursor-pointer hover:bg-gray-100"
 			variant="outline"
 		/>
 		<Button
-			iconFirst={pictures.arrow}
+			iconFirst={pictures.Arrow}
 			class="h-10 w-10  hover:cursor-pointer hover:bg-gray-100"
 			variant="outline"
 		/>
