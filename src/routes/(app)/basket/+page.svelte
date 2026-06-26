@@ -1,23 +1,24 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ProductCard from '$lib/components/card/productCard.svelte';
 	import Button from '$lib/components/button.svelte';
 	import OrderModal from '$lib/components/basket/orderModal.svelte';
 	import type { CartItem } from '$lib/api/type';
 	import { CLIENT } from '$lib/api/CLIENT';
 
-	let items: CartItem[] = $state([]);
+	let { data } = $props();
+
+	let items: CartItem[] = $state(data.items || []);
 	let isOpenOrderModal: boolean = $state(false);
 
-	onMount(async () => {
-		const token = localStorage.getItem('token');
-		const response = await CLIENT.GET('/api/cart', {
-			headers: {
-				Authorization: `Bearer ${token}`
-			}
-		});
-		items = response.data?.items || [];
-	});
+	const openModal = () => {
+		isOpenOrderModal = true;
+	};
+
+	let priceOfProduct = $derived(
+		items.reduce((sum, item) => {
+			return sum + item.product.price * item.quantity;
+		}, 0)
+	);
 
 	async function addQuantity(id: string) {
 		const token = localStorage.getItem('token');
@@ -71,27 +72,19 @@
 			item.quantity = newQuantity;
 		}
 	}
-	const openModal = () => {
-		isOpenOrderModal = true;
-	};
-	let priceOfProduct = $derived(
-		items.reduce((sum, item) => {
-			return sum + item.product.price * item.quantity;
-		}, 0)
-	);
 </script>
 
-<div class="mb-[20px] w-11/12 border-b px-12.5 py-4">
+<div class="mb-5 w-11/12 border-b px-12.5 py-4">
 	<h1 class="text-2xl font-bold">Корзина</h1>
 </div>
-<div class="mx-auto flex max-w-[1600px] justify-center gap-[60px] px-[50px] pb-[100px]">
+<div class="mx-auto flex max-w-[1600px] justify-center gap-15 px-12.5 pb-25">
 	<div class="w-full flex-1">
-		<div class="flex flex-wrap gap-x-[30px] gap-y-[50px]">
+		<div class="flex flex-wrap gap-x-7.5 gap-y-12.5">
 			{#if items.length === 0}
 				<p class="text-gray-500">Корзина пуста</p>
 			{:else}
 				{#each items as item (item.id)}
-					<div class="w-[280px] shrink-0">
+					<div class="w-70 shrink-0">
 						<ProductCard
 							name={item.product.name}
 							price={item.product.price}
@@ -108,7 +101,7 @@
 		</div>
 	</div>
 
-	<div class="w-[340px] shrink-0">
+	<div class="w-85 shrink-0">
 		{#if items.length > 0}
 			<div class="border border-[#D9D9D9] p-6">
 				<p class="mb-6 text-lg font-bold">К оформлению</p>

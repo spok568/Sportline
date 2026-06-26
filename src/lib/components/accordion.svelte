@@ -10,7 +10,7 @@
 		iconLast,
 		iconFirst
 	}: {
-		title?: string;
+		title?: string | Component<SVGAttributes<SVGElement>>;
 		isOpen?: boolean;
 		onClick?: () => void;
 		children?: import('svelte').Snippet;
@@ -25,15 +25,14 @@
 </script>
 
 <div class={className}>
-	<button onclick={onClick || toggle} class="flex w-full  items-center justify-between py-2">
-		<div class="flex items-center gap-2">
-			{#if iconFirst }
-			<div  class=" {isOpen ? 'rotate-270' : 'rotate-0'}">
-<svelte:component this={iconFirst} />
-			</div>
-				
+	<button onclick={onClick || toggle} class="flex w-full items-center justify-between py-2">
+		<div class="">
+			{#if iconFirst}
+				<div>
+					<svelte:component this={iconFirst} />
+				</div>
 			{/if}
-			<span class="uppercase font-medium leading-10 text-sm tracking-[2px] ">{title}</span>
+			<span class="text-sm leading-10 font-medium tracking-[2px] uppercase">{title}</span>
 		</div>
 
 		{#if iconLast}

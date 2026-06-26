@@ -1,7 +1,7 @@
 import { CLIENT } from "$lib/api/CLIENT";
 
 const recommendProducts = async () => {
-    const res = await CLIENT.GET("/api/products/featured");
+	const res = await CLIENT.GET('/api/products/featured', {});
     return res.data || [];
 };
 

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { Component } from 'svelte';
-	import type { SVGAttributes } from 'svelte/elements';
 	import type { PropsForInput } from '$lib/api/type';
 
 	let {
@@ -35,11 +33,18 @@
 				</div>
 			{/if}
 
-			<input {id} type={inputType} {placeholder} {required} bind:value class="{className} " />
+			<input
+				{id}
+				type={inputType}
+				{placeholder}
+				{required}
+				bind:value
+				class="{className} focus:border-transparent focus:ring-1 focus:ring-offset-0 focus:outline-none"
+			/>
 
 			{#if iconLast}
 				<div class="absolute right-3 flex items-center">
-					<svelte:component this={iconLast} class="h-5 w-5 " />
+					<svelte:component this={iconLast} class="h-5 w-5" />
 				</div>
 			{/if}
 		</div>

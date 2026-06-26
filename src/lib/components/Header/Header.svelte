@@ -6,12 +6,9 @@
 	import Profile from '$lib/components/Header/profile.svelte';
 	import { getUser } from '$lib/api/users';
 	import { onMount } from 'svelte';
-	import type { User } from '$lib/api/users';
-
-	let user: User | null = $state(null);
 
 	onMount(() => {
-		user = getUser();
+		getUser();
 	});
 </script>
 

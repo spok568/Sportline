@@ -5,9 +5,10 @@
 	import type { Product, Categories } from '$lib/api/type';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/button.svelte';
+	import { resolve } from '$app/paths';
 
 	function goToCatalog() {
-		goto('/catalog');
+		goto(resolve('/catalog'));
 	}
 	let {
 		data
@@ -47,7 +48,7 @@
 				label="Просмотреть все"
 				variant="noBorder"
 				class="cursor-pointer font-family-poppins text-[14px] text-[#5D5D5D]"
-				onClick={goto('/catalog')}
+				onClick={goto(resolve('/catalog'))}
 			/>
 		</div>
 

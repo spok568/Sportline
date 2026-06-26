@@ -4,7 +4,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import { goto } from '$app/navigation';
 	import { getToken, getUser } from '$lib/api/users';
-	import type { RegisterFormData } from '$lib/api/validate-schema.js';
+	import type { RegisterFormData } from '$lib/api/validateSchema';
 	import { CLIENT } from '$lib/api/CLIENT.js';
 	import { superForm } from 'sveltekit-superforms/client';
 	import type { SuperValidated } from 'sveltekit-superforms';

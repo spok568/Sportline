@@ -12,6 +12,9 @@
 	import SearchCatalog from '$lib/components/catalog/searchCatalog.svelte';
 	import { resolve } from '$app/paths';
 	import Accordion from '$lib/components/accordion.svelte';
+	import AuthModal from '$lib/components/authModal/authModal.svelte';
+	import { getUser } from '$lib/api/users';
+	let isOpenModalAuth: boolean = $state(false);
 
 	let isOpenModalWindow: boolean = $state(false);
 	let selectedProduct: Product | null = $state(null);
@@ -19,7 +22,7 @@
 	let selectedProductPrice: string | number = $state('');
 	let quantity: number = $state(1);
 	let selectedProductId: string = $state('');
-
+	let token = getUser();
 	let selectedSize: Sizes = $state('M');
 	let {
 		data
@@ -32,6 +35,14 @@
 	} = $props();
 	function closeModal() {
 		isOpenModalWindow = false;
+	}
+
+	function autoModal() {
+		if (!token) {
+			isOpenModalAuth = true;
+		} else {
+			goto(resolve('/(app)/basket'));
+		}
 	}
 
 	export async function getToBasket() {
@@ -74,41 +85,42 @@
 			<ButtonSelected />
 		</div>
 
-		<div class="py-2 ">
+		<div class="py-2">
 			<Accordion title="Категория" iconLast={pictures.Arrow} class="border-b border-[#C9C9C9] ">
-
-					<div class="p-2" in:fly={{ y: -10, duration: 200 }} out:fade>
-						<Input text="Одежда" inputType="checkbox" className='border-[#A2A2A2] ' />
-						<Input text="Обувь" inputType="checkbox" className='border-[#A2A2A2]'/>
-						<Input text="Спорт товары" inputType="checkbox" className='border-[#A2A2A2]'/>
-					</div>
-		
-			</Accordion>
-			
-
-				<Accordion 
-				title='Цвет'
-				iconLast={pictures.Arrow}
-				 class="border-b border-[#C9C9C9]"
-				>
-					<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
-					<Input text="Белый" inputType="checkbox" className='border-[#A2A2A2]'/>
-					<Input text="Черный" inputType="checkbox" className='border-[#A2A2A2]'/>
-					<Input text="Красный" inputType="checkbox" className='border-[#A2A2A2]'/>
+				<div class="p-2" in:fly={{ y: -10, duration: 200 }} out:fade>
+					<Input text="Одежда" inputType="checkbox" className="border-[#A2A2A2] " />
+					<Input text="Обувь" inputType="checkbox" className="border-[#A2A2A2]" />
+					<Input text="Спорт товары" inputType="checkbox" className="border-[#A2A2A2]" />
 				</div>
 			</Accordion>
 
-			<Accordion 
-				title='Цeна'
-				iconLast={pictures.Arrow}
-				 class="border-b border-[#C9C9C9]"
-				>
-					<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
-					<input class="w-50 border-[#A2A2A2]" type="range" bind:value={priceFrom} min="0" max="10000" />
+			<Accordion title="Цвет" iconLast={pictures.Arrow} class="border-b border-[#C9C9C9]">
+				<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
+					<Input text="Белый" inputType="checkbox" className="border-[#A2A2A2]" />
+					<Input text="Черный" inputType="checkbox" className="border-[#A2A2A2]" />
+					<Input text="Красный" inputType="checkbox" className="border-[#A2A2A2]" />
+				</div>
+			</Accordion>
+
+			<Accordion title="Цeна" iconLast={pictures.Arrow} class="border-b border-[#C9C9C9]">
+				<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
+					<input
+						class="w-50 border-[#A2A2A2]"
+						type="range"
+						bind:value={priceFrom}
+						min="0"
+						max="10000"
+					/>
 
 					<p>цена от: {priceFrom}</p>
 
-					<input class="w-50 border-[#A2A2A2]" type="range" bind:value={priceUpTo} min="0" max="10000" />
+					<input
+						class="w-50 border-[#A2A2A2]"
+						type="range"
+						bind:value={priceUpTo}
+						min="0"
+						max="10000"
+					/>
 
 					<p>цена до: {priceUpTo}</p>
 
@@ -120,7 +132,6 @@
 					</div>
 				</div>
 			</Accordion>
-	
 		</div>
 	</div>
 
@@ -196,18 +207,18 @@
 </div>
 {#if isOpenModalWindow}
 	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-		<div class="relative flex h-[511px] w-[880px] items-center justify-center gap-[10px] bg-white">
+		<div class="relative flex h-127.75 w-220 items-center justify-center gap-2.5 bg-white">
 			<img
 				src={selectedProductImage}
 				alt="Выбранный продукт"
-				class="mr-15 h-[431px] w-[320px] border-[1px] border-[#D9D9D9]"
+				class="mr-15 h-107.75 w-[320px] border border-[#D9D9D9]"
 			/>
-			<div class="flex w-[350px] flex-col border border-[#D9D9D9] px-4 py-4">
-				<div class="pt-[20px] pr-[20px] pb-[10px] pl-[20px]">
+			<div class="flex w-87.5 flex-col border border-[#D9D9D9] px-4 py-4">
+				<div class="pt-5 pr-5 pb-2.5 pl-5">
 					<h2 class="text-[16px] font-bold">{selectedProduct?.name}</h2>
 					<p class="text-3xl">{selectedProductPrice} ₽</p>
 				</div>
-				<div class="  pr-[5px] pl-[10px]">
+				<div class="  pr-1.25 pl-2.5">
 					<p class="mb-3 text-lg text-gray-500">Размеры</p>
 					<div class="flex flex-nowrap gap-0.5">
 						<ButtonSelected bind:selectedSize />
@@ -222,9 +233,11 @@
 							variant="outline"
 							onClick={() => {
 								if (selectedSize) {
-									getToBasket();
-								} else {
-									alert('Выберите размер');
+									if (token) {
+										getToBasket();
+									} else {
+										autoModal();
+									}
 								}
 							}}
 							class="flex w-full justify-center gap-2 py-4 text-xl"
@@ -236,9 +249,10 @@
 				variant="noBorder"
 				size="sm"
 				label="Х"
-				class="absolute top-[40px] right-[50px] flex h-10 w-10 items-center justify-center bg-white text-xl hover:cursor-pointer "
+				class="absolute top-10 right-12.5 flex h-10 w-10 items-center justify-center bg-white text-xl hover:cursor-pointer "
 				onClick={closeModal}
 			/>
+			<AuthModal bind:isOpenModalAuth />
 		</div>
 	</div>
 {/if}
