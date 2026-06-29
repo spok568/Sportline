@@ -7,38 +7,41 @@
 	<Button
 		size="sm"
 		variant="outline"
-		class="border border-[#A3A3A3]"
+		class="border border-[#A3A3A3]  hover:cursor-pointer"
 		onClick={() => (selectedSize = 'XS')}>XS</Button
 	>
 	<Button
 		size="sm"
 		variant="outline"
-		class="border border-[#A3A3A3]"
+		class="border-[#A3A3A3 ] border  hover:cursor-pointer"
 		onClick={() => (selectedSize = 'S')}>S</Button
 	>
 	<Button
 		size="sm"
 		variant="outline"
-		class="border border-[#A3A3A3]"
+		class="border border-[#A3A3A3]  hover:cursor-pointer"
 		onClick={() => (selectedSize = 'M')}>M</Button
 	>
 	<Button
 		size="sm"
 		variant="outline"
-		class="border border-[#A3A3A3]"
+		class="border border-[#A3A3A3]  hover:cursor-pointer"
 		onClick={() => (selectedSize = 'L')}>L</Button
 	>
 	<Button
 		size="sm"
 		variant="outline"
-		class="border border-[#A3A3A3]"
+		class="border border-[#A3A3A3]  hover:cursor-pointer"
 		onClick={() => (selectedSize = 'XL')}>XL</Button
 	>
 	<Button
 		size="sm"
 		variant="outline"
-		class="border border-[#A3A3A3]"
+		class="border border-[#A3A3A3] hover:cursor-pointer"
 		onClick={() => (selectedSize = 'XXL')}>XXL</Button
 	>
+
+	<p class="mt-2 text-sm text-gray-600">
+		Selected size: <span class="text-green-300">{selectedSize || ''}</span>
+	</p>
 </div>
-<p class="mt-2 text-sm text-gray-600">Selected size: {selectedSize || ''}</p>

@@ -70,8 +70,8 @@
 		closeModal();
 		goto(resolve('/basket'));
 	}
-	let priceFrom = $state(0);
-	let priceUpTo = $state(0);
+	let priceFrom: string = $state('0');
+	let priceUpTo: string = $state('0');
 </script>
 
 <SearchCatalog />
@@ -104,25 +104,22 @@
 
 			<Accordion title="Цeна" iconLast={pictures.Arrow} class="border-b border-[#C9C9C9]">
 				<div class="p-2" in:fly={{ y: 10, duration: 200 }} out:fade>
-					<input
-						class="w-50 border-[#A2A2A2]"
-						type="range"
-						bind:value={priceFrom}
-						min="0"
-						max="10000"
-					/>
+					<div class="flex gap-4">
+						<Input
+							inputType="number"
+							className="w-27 border rounded-lg  h-8"
+							placeholder="цена от:"
+							bind:value={priceFrom}
+						/>
 
-					<p>цена от: {priceFrom}</p>
-
-					<input
-						class="w-50 border-[#A2A2A2]"
-						type="range"
-						bind:value={priceUpTo}
-						min="0"
-						max="10000"
-					/>
-
-					<p>цена до: {priceUpTo}</p>
+						<Input
+							inputType="number"
+							className="w-27 border rounded-lg  h-8"
+							placeholder="цена до:"
+							bind:value={priceUpTo}
+						/>
+					</div>
+					<Input className="w-50 border-[#A2A2A2]" inputType="range" bind:value={priceUpTo} />
 
 					<div>
 						{#if priceFrom > priceUpTo}
@@ -223,9 +220,6 @@
 					<div class="flex flex-nowrap gap-0.5">
 						<ButtonSelected bind:selectedSize />
 					</div>
-					{#if selectedSize}
-						<p class="mt-2 text-sm text-green-600">Выбран размер: {selectedSize}</p>
-					{/if}
 					<div class="pt-6">
 						<Button
 							iconLast={pictures.ShoppingCart}

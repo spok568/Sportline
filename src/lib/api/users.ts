@@ -1,33 +1,10 @@
+import type { User } from './type';
+import type { LoginResponse } from './type';
+import type { loginBody } from './type';
 
+let loggedInUser: User | null = null;
 
-export type User = {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-type LoginResponse = {
-   accessToken:string;
-tokenType:string;
-user:User
-
-}
-
-
-type loginBody = {
-    email:string;
-    password:string;
-}
-
-let loggedInUser:User | null = null
-
-export async function login (body:loginBody){
-
+export async function login(body: loginBody) {
      const response = await fetch('http://localhost:3000/api/auth/login', {
     method: 'POST',
     headers: {

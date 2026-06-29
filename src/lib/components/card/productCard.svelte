@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { PropsForCard } from '$lib/api/type';
+	import Button from '../button.svelte';
+	import { pictures } from '../icon/icons';
 
 	let {
 		name,
@@ -18,24 +20,31 @@
 
 <div class=" relative mb-16 flex h-90.75 w-78 p-6">
 	{#if onDelete}
-		<button onclick={onDelete} class="absolute top-6 right-2 flex h-6 cursor-pointer"> Х </button>
+		<Button
+			onClick={onDelete}
+			class="absolute top-7 right-1 flex  cursor-pointer"
+			iconFirst={pictures.Cross}
+			variant="noBorder"
+		/>
 	{/if}
 	{#if quantity != null}
 		<div class="absolute top-50 right-2 flex w-1.75 font-family-beatrice text-[14px] font-medium">
 			{span}
 		</div>
 		<div class="absolute top-59.25 left-74 flex w-5.25 flex-col border border-gray-300">
-			<button
-				onclick={onClick}
-				class="border-b border-gray-300 py-1.5 text-sm hover:cursor-pointer hover:bg-gray-100"
-				>+</button
-			>
+			<Button
+				iconFirst={pictures.Plus}
+				{onClick}
+				variant="noBorder"
+				class="border-b border-gray-300 p-1.5 text-sm hover:cursor-pointer hover:bg-gray-100"
+			/>
 			<span class="py-1.5 text-center text-sm font-medium">{quantity}</span>
-			<button
-				onclick={onDelete}
-				class="border-t border-gray-300 py-1.5 text-sm hover:cursor-pointer hover:bg-gray-100"
-				>-</button
-			>
+			<Button
+				iconLast={pictures.Minus}
+				{onClick}
+				variant="noBorder"
+				class="border-t border-gray-300 p-1.5 text-sm hover:cursor-pointer hover:bg-gray-100"
+			/>
 		</div>
 	{/if}
 	<div class="relative {className}">

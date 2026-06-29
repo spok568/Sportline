@@ -106,7 +106,7 @@
 			<div class="border border-[#D9D9D9] p-6">
 				<p class="mb-6 text-lg font-bold">К оформлению</p>
 
-				<div class="flex flex-col gap-[10px]">
+				<div class="flex flex-col gap-2.5">
 					{#each items as item (item.id)}
 						<div class="flex items-center justify-between">
 							<span class="text-sm font-bold">{item.product.name}</span>

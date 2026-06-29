@@ -6,6 +6,8 @@ import ProfileIcon from './icons/profileIcon.svelte';
 import Search from './icons/search.svelte';
 import ShoppingCart from './icons/shoppingCart.svelte';
 import Sportline from './icons/sportline.svelte';
+import Cross from './icons/cross.svelte';
+import Key from './icons/key.svelte';
 
 export const pictures = {
 	Arrow,
@@ -15,5 +17,7 @@ export const pictures = {
 	ProfileIcon,
 	Search,
 	ShoppingCart,
-	Sportline
+	Sportline,
+	Cross,
+	Key
 } as const;

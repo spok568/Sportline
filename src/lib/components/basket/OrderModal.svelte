@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '../button.svelte';
+	import { pictures } from '../icon/icons';
 	import Input from '../input.svelte';
 	let addres: string = $state('');
 	let floor: string = $state('');
@@ -27,9 +28,10 @@
 				<Button
 					size="sm"
 					variant="noBorder"
+					iconFirst={pictures.Cross}
 					onClick={() => (isOpenOrderModal = false)}
-					class=" hover:cursor-pointer">✕</Button
-				>
+					class=" hover:cursor-pointer"
+				></Button>
 			</div>
 			{#if tabs === 'доставка'}
 				<div class="   relative flex flex-col gap-3">

@@ -4,7 +4,8 @@
 	import { fade, fly } from 'svelte/transition';
 	import { logout } from '$lib/api/function';
 	import { getToken } from '$lib/api/users';
-
+	import AuthModal from '../authModal/authModal.svelte';
+	let isOpenModalAuth: boolean = $state(false);
 	let token = getToken();
 	let isMenuOpen = $state(false);
 </script>
@@ -37,6 +38,10 @@
 	<Button
 		label="Войти"
 		variant="outline"
+		onClick={() => (isOpenModalAuth = true)}
 		class="rounded-lg hover:cursor-pointer hover:bg-gray-100"
 	/>
 {/if}
+<div class="  inset-0 flex items-start justify-end">
+	<AuthModal bind:isOpenModalAuth />
+</div>

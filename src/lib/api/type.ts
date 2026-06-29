@@ -18,6 +18,7 @@ export interface PropsForCard {
 	imageUrl?: string;
 	Url?: Component<SVGAttributes<SVGElement>> | string;
 	cost?: string;
+	iconFirst?: Component<SVGAttributes<SVGElement>> | string;
 	iconLast?: Component<SVGAttributes<SVGElement>> | string;
 	label?: string;
 	span?: string;
@@ -96,5 +97,26 @@ export interface ProductsResponse {
 		totalPages: number;
 	};
 }
+export type User = {
+	id: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	phone: string;
+	role: string;
+	createdAt: string;
+	updatedAt: string;
+};
+export type LoginResponse = {
+	accessToken: string;
+	tokenType: string;
+	role: string;
+	user: User;
+};
+
+export type loginBody = {
+	email: string;
+	password: string;
+};
 
 export type Sizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';

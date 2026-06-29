@@ -7,6 +7,9 @@
 	import Button from '$lib/components/button.svelte';
 	import { resolve } from '$app/paths';
 
+	let userRol = localStorage.getItem('role');
+	$inspect(userRol);
+
 	function goToCatalog() {
 		goto(resolve('/catalog'));
 	}
@@ -22,7 +25,6 @@
 		};
 	} = $props();
 	function getProductsByCategory(categoryId: string) {
-		const recomendProduct = [...data.recommend];
 		const allProducts = [...data.closes, ...data.shoes, ...data.sport];
 		return allProducts.filter((product) => product.categoryId === categoryId);
 	}
@@ -36,10 +38,10 @@
 		{/each}
 	</div>
 	{#each data.categories as categori (categori.id)}
-		<div class="flex h-[68px] w-[1,180px] justify-between gap-[10px] p-[10px] py-7.5">
-			<div class="h-[48px] w-[892px]">
+		<div class="flex h-17 w-[1,180px] justify-between gap-2.5 p-2.5 py-7.5">
+			<div class="h-12 w-223">
 				<span
-					class="h-[48px] w-[301px] font-family-poppins text-[40px] leading-[40px] font-bold uppercase italic"
+					class="h-12 w-75.25 font-family-poppins text-[40px] leading-10 font-bold uppercase italic"
 				>
 					{categori.name}</span
 				>
@@ -55,7 +57,7 @@
 		{#each getProductsByCategory(categori.id) as product, index (index)}
 			<div class="flex">
 				<ProductCard
-					class="w-[312px] font-family-poppins leading-2 tracking-[2px] text-[#2C2C2C] uppercase"
+					class="w-78 font-family-poppins leading-2 tracking-[2px] text-[#2C2C2C] uppercase"
 					name={product.name}
 					price={product.price}
 					imageUrl={product.imageUrl}

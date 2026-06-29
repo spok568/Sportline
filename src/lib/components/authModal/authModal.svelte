@@ -10,6 +10,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import { resolve } from '$app/paths';
+	import { pictures } from '../icon/icons';
 
 	type ApiResponse<T = unknown> = { error?: { message?: string }; data?: T } | null;
 
@@ -68,11 +69,15 @@
 
 {#if isOpenModalAuth}
 	<div
-		class="fixed z-500 m-0 flex min-h-screen min-w-screen items-center justify-center bg-black/80"
+		class="fixed inset-0 z-999 m-0 flex min-h-screen min-w-screen items-center justify-center bg-black/80"
 	>
 		<div class="relative h-95.5 w-157.75 bg-white p-6 shadow-md">
-			<div class="absolute top-0 right-2">
-				<Button label="x" variant="noBorder" onClick={() => (isOpenModalAuth = false)} />
+			<div class="absolute top-2 right-3">
+				<Button
+					iconFirst={pictures.Cross}
+					variant="noBorder"
+					onClick={() => (isOpenModalAuth = false)}
+				/>
 			</div>
 			<Tabs.Root value="login">
 				<div class="mb-6 flex w-full justify-center border-b border-gray-200 pb-2">

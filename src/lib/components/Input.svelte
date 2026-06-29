@@ -26,7 +26,7 @@
 			<span>{text}</span>
 		</div>
 	{:else}
-		<div class="relative flex items-center bg-white">
+		<div class="relative flex items-center">
 			{#if iconFirst}
 				<div class="absolute left-3 flex items-center">
 					<svelte:component this={iconFirst} class="h-5 w-5" />
@@ -39,7 +39,7 @@
 				{placeholder}
 				{required}
 				bind:value
-				class="{className} focus:border-transparent focus:ring-1 focus:ring-offset-0 focus:outline-none"
+				class="{className}  focus:ring-1 focus:ring-offset-0 focus:outline-none"
 			/>
 
 			{#if iconLast}

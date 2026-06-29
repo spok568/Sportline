@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '../Button.svelte';
+	import Button from '../button.svelte';
 </script>
 
 <div class="flex justify-between border-b px-48 py-4">
