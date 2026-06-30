@@ -124,7 +124,7 @@
 					label="Продолжить"
 					variant="outline"
 					size="sm"
-					class="mt-6 w-full bg-[#D9D9D9] "
+					class="mt-6 w-full bg-[#D9D9D9] hover:cursor-pointer hover:bg-gray-300"
 					onClick={openModal}
 				/>
 			</div>

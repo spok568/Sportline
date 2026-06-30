@@ -1,44 +1,50 @@
-import type { User } from './type';
-import type { LoginResponse } from './type';
-import type { loginBody } from './type';
+import { CLIENT } from '$lib/api/CLIENT';
+import { dataOrThrow } from '$lib/api/dataOrThrow';
+
+import type { User, LoginResponse, loginBody } from '$lib/api/type';
 
 let loggedInUser: User | null = null;
 
-export async function login(body: loginBody) {
-     const response = await fetch('http://localhost:3000/api/auth/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-  if(!response.ok){
-    return null
-  }
- const data:LoginResponse = await response.json()
-  localStorage.setItem('token', data.accessToken)
-localStorage.setItem('user', JSON.stringify(data.user)) 
-  loggedInUser = data.user
-  return data
-}
-export function logout():void{
-  localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    loggedInUser  = null
-}
-export function getToken():string | null {
-    return localStorage.getItem('token')
-}  
+export async function login(body: loginBody): Promise<LoginResponse> {
+	const data = await dataOrThrow<LoginResponse>(
+		CLIENT.POST('/api/auth/login', {
+			body
+		})
+	);
 
-export function getUser():User|null {
-    if (loggedInUser) return loggedInUser;
-  
-  if (typeof window !== 'undefined') {
-    const userStr = localStorage.getItem('user');
-    if (userStr) {
-      loggedInUser = JSON.parse(userStr);
-      return loggedInUser;
-    }
-  } 
-    return null
+	localStorage.setItem('token', data.accessToken);
+	localStorage.setItem('user', JSON.stringify(data.user));
+	localStorage.setItem('role', data.user.role);
+
+	loggedInUser = data.user;
+
+	return data;
+}
+
+export function logout() {
+	localStorage.removeItem('token');
+	localStorage.removeItem('user');
+	localStorage.removeItem('role');
+
+	loggedInUser = null;
+}
+
+export function getToken() {
+	return localStorage.getItem('token');
+}
+
+export function getRole() {
+	return localStorage.getItem('role');
+}
+
+export function getUser(): User | null {
+	if (loggedInUser) return loggedInUser;
+
+	const user = localStorage.getItem('user');
+
+	if (!user) return null;
+
+	loggedInUser = JSON.parse(user);
+
+	return loggedInUser;
 }

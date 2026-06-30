@@ -31,10 +31,10 @@
 		const allProducts = [...data.closes, ...data.shoes, ...data.sport];
 		return allProducts.filter((product) => product.categoryId === categoryId);
 	}
+	const slideWidth = 312;
 	let currentIndex = $state(0);
 
 	let transform = $derived(`translateX(-${currentIndex * slideWidth}px)`);
-	const slideWidth = 312;
 
 	function next() {
 		if (currentIndex < data.recommend.length - 1) {

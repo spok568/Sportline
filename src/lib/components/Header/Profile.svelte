@@ -15,7 +15,7 @@
 		<Button
 			iconFirst={pictures.ProfileIcon}
 			variant="noBorder"
-			class="h-12.5 w-12.5 rounded-full bg-black text-white hover:bg-gray-900"
+			class="h-12.5 w-12.5 rounded-full bg-black text-white hover:cursor-pointer hover:bg-gray-900"
 			onClick={() => (isMenuOpen = !isMenuOpen)}
 		/>
 

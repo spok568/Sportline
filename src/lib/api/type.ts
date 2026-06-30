@@ -110,13 +110,23 @@ export type User = {
 export type LoginResponse = {
 	accessToken: string;
 	tokenType: string;
-	role: string;
 	user: User;
 };
 
 export type loginBody = {
 	email: string;
 	password: string;
+};
+
+export type PropsForAdminCard = {
+	name?: string;
+	size?: Sizes;
+	imageUrl?: string;
+	category?: Categories;
+	price?: string;
+	span?: string;
+	text?: string;
+	icon?: Component<SVGAttributes<SVGElement>> | string;
 };
 
 export type Sizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';

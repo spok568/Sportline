@@ -234,7 +234,7 @@
 									}
 								}
 							}}
-							class="flex w-full justify-center gap-2 py-4 text-xl"
+							class="flex w-full justify-center gap-2 py-4 text-xl hover:cursor-pointer hover:bg-gray-100"
 						/>
 					</div>
 				</div>
@@ -242,7 +242,7 @@
 			<Button
 				variant="noBorder"
 				size="sm"
-				label="Х"
+				iconFirst={pictures.Cross}
 				class="absolute top-10 right-12.5 flex h-10 w-10 items-center justify-center bg-white text-xl hover:cursor-pointer "
 				onClick={closeModal}
 			/>

@@ -30,7 +30,7 @@
 
 	const variantClasses = {
 		primary: 'bg-blue-600 hover:bg-blue-700 text-white',
-		outline: 'border border-gray-300 hover:bg-gray-100',
+		outline: 'border border-gray-300 ',
 		noBorder: ''
 	};
 

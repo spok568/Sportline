@@ -40,13 +40,14 @@
 							size="sm"
 							variant="outline"
 							onClick={() => (tabs = 'доставка')}
-							class="h-8.5 w-65.25 bg-black pt-1.75 pb-1.75 text-white">Доставка</Button
+							class="h-8.5 w-65.25 bg-black pt-1.75 pb-1.75 text-white  hover:cursor-pointer"
+							>Доставка</Button
 						>
 						<Button
 							size="sm"
 							variant="outline"
 							onClick={() => (tabs = 'самовывоз')}
-							class="h-8.5 w-65.25 pt-1.75 pb-1.75">Самовывоз</Button
+							class="  h-8.5 w-65.25 pt-1.75 pb-1.75 hover:cursor-pointer">Самовывоз</Button
 						>
 					</div>
 					<p class="font-bold">Укажите ваш адрес</p>
@@ -94,7 +95,7 @@
 						<Button
 							variant="outline"
 							onClick={order}
-							class="flex h-8.75 w-132.75 items-center justify-center gap-1.75 bg-[#D9D9D9] p-2.5 text-center "
+							class="flex h-8.75 w-132.75 items-center justify-center gap-1.75 bg-[#D9D9D9] p-2.5 text-center hover:cursor-pointer "
 							>Заказать</Button
 						>
 					</div>
@@ -131,7 +132,7 @@
 						<Button
 							variant="outline"
 							label="Заказать"
-							class="flex h-8.75 w-132.75 items-center justify-center gap-1.75 bg-[#D9D9D9] p-2.5"
+							class="flex h-8.75 w-132.75 items-center justify-center gap-1.75 bg-[#D9D9D9] p-2.5 hover:cursor-pointer"
 							onClick={order}
 						></Button>
 					</div>

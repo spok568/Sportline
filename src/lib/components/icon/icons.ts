@@ -8,6 +8,9 @@ import ShoppingCart from './icons/shoppingCart.svelte';
 import Sportline from './icons/sportline.svelte';
 import Cross from './icons/cross.svelte';
 import Key from './icons/key.svelte';
+import AdminArrow from './icons/adminArrow.svelte';
+import Pencil from './icons/pencil.svelte';
+import Trashan from './icons/trashСan.svelte';
 
 export const pictures = {
 	Arrow,
@@ -19,5 +22,8 @@ export const pictures = {
 	ShoppingCart,
 	Sportline,
 	Cross,
-	Key
+	Key,
+	AdminArrow,
+	Pencil,
+	Trashan
 } as const;
