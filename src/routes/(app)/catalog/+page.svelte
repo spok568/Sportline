@@ -119,9 +119,8 @@
 							bind:value={priceUpTo}
 						/>
 					</div>
-					<Input className="w-50 border-[#A2A2A2]" inputType="range" bind:value={priceUpTo} />
 
-					<div>
+					<div class="py-4">
 						{#if priceFrom > priceUpTo}
 							<div><p class="text-red-500">цена от не может быть больше до</p></div>
 						{/if}
