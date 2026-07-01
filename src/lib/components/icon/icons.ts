@@ -11,6 +11,7 @@ import Key from './icons/key.svelte';
 import AdminArrow from './icons/adminArrow.svelte';
 import Pencil from './icons/pencil.svelte';
 import Trashan from './icons/trashСan.svelte';
+import ArrowDown from './icons/arrowDown.svelte';
 
 export const pictures = {
 	Arrow,
@@ -25,5 +26,6 @@ export const pictures = {
 	Key,
 	AdminArrow,
 	Pencil,
-	Trashan
+	Trashan,
+	ArrowDown
 } as const;

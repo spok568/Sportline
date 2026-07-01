@@ -122,11 +122,11 @@ export type PropsForAdminCard = {
 	name?: string;
 	size?: Sizes;
 	imageUrl?: string;
-	category?: Categories;
+	category?: string;
+	className?: string;
 	price?: string;
 	span?: string;
 	text?: string;
-	icon?: Component<SVGAttributes<SVGElement>> | string;
 };
 
 export type Sizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';

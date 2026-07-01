@@ -53,7 +53,7 @@
 	{@render children?.()}
 	{#if iconLast}
 		<div class="flex items-center justify-center">
-			<svelte:component this={iconLast} class="h-5 w-5" />
+			<svelte:component this={iconLast} class="h-3.5 w-3.5" />
 		</div>
 	{/if}
 </button>
